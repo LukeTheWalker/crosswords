@@ -3,89 +3,89 @@ size:
     height: 14
 n_blacks: 28
 blacks:
-    -   x_cord: 18
+    -   x_cord: 0
+        y_cord: 7
+
+    -   x_cord: 1
+        y_cord: 4
+
+    -   x_cord: 1
+        y_cord: 6
+        
+    -   x_cord: 1
         y_cord: 12
 
-    -   x_cord: 19
-        y_cord: 20
+    -   x_cord: 2
+        y_cord: 3
+        
+    -   x_cord: 2
+        y_cord: 11
 
-    -   x_cord: 18
+    -   x_cord: 3
+        y_cord: 2
+
+    -   x_cord: 3
+        y_cord: 10
+        
+    -   x_cord: 4
+        y_cord: 1
+        
+    -   x_cord: 4
+        y_cord: 9
+
+    -   x_cord: 5
+        y_cord: 8
+        
+    -   x_cord: 6
+        y_cord: 1
+
+    -   x_cord: 6
+        y_cord: 7
+
+    -   x_cord: 6
+        y_cord: 13
+
+    -   x_cord: 7
+        y_cord: 0
+        
+    -   x_cord: 7
+        y_cord: 6
+
+    -   x_cord: 7
         y_cord: 12
         
-    -   x_cord: 19
-        y_cord: 20
+    -   x_cord: 8
+        y_cord: 5
 
-    -   x_cord: 18
+    -   x_cord: 9
+        y_cord: 4
+
+    -   x_cord: 9
         y_cord: 12
         
-    -   x_cord: 19
-        y_cord: 20
-
-    -   x_cord: 18
-        y_cord: 12
-
-    -   x_cord: 19
-        y_cord: 20
+    -   x_cord: 10
+        y_cord: 3
         
-    -   x_cord: 18
-        y_cord: 12
+    -   x_cord: 10
+        y_cord: 11
+
+    -   x_cord: 11
+        y_cord: 2
         
-    -   x_cord: 19
-        y_cord: 20
+    -   x_cord: 11
+        y_cord: 10
 
-    -   x_cord: 18
-        y_cord: 12
+    -   x_cord: 12
+        y_cord: 1
+
+    -   x_cord: 12
+        y_cord: 7
+
+    -   x_cord: 12
+        y_cord: 9
         
-    -   x_cord: 19
-        y_cord: 20
-
-    -   x_cord: 18
-        y_cord: 12
-
-    -   x_cord: 19
-        y_cord: 20
-
-    -   x_cord: 18
-        y_cord: 12
-        
-    -   x_cord: 19
-        y_cord: 20
-
-    -   x_cord: 18
-        y_cord: 12
-        
-    -   x_cord: 19
-        y_cord: 20
-
-    -   x_cord: 18
-        y_cord: 12
-
-    -   x_cord: 19
-        y_cord: 20
-        
-    -   x_cord: 18
-        y_cord: 12
-        
-    -   x_cord: 19
-        y_cord: 20
-
-    -   x_cord: 18
-        y_cord: 12
-        
-    -   x_cord: 19
-        y_cord: 20
-
-    -   x_cord: 18
-        y_cord: 12
-
-    -   x_cord: 19
-        y_cord: 20
-
-    -   x_cord: 18
-        y_cord: 12
-        
-    -   x_cord: 19
-        y_cord: 20
+    -   x_cord: 13
+        y_cord: 6
 
     -   x_cord: 18
         y_cord: 12
