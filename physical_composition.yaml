@@ -87,42 +87,6 @@ blacks:
     -   x_cord: 13
         y_cord: 6
 
-    -   x_cord: 18
-        y_cord: 12
-        
-    -   x_cord: 19
-        y_cord: 20
-
-    -   x_cord: 18
-        y_cord: 12
-
-    -   x_cord: 19
-        y_cord: 20
-        
-    -   x_cord: 18
-        y_cord: 12
-        
-    -   x_cord: 19
-        y_cord: 20
-
-    -   x_cord: 18
-        y_cord: 12
-        
-    -   x_cord: 19
-        y_cord: 20
-
-    -   x_cord: 18
-        y_cord: 12
-        
-    -   x_cord: 19
-        y_cord: 20
-
-    -   x_cord: 18
-        y_cord: 12
-        
-    -   x_cord: 19
-        y_cord: 20
-
 n_numbers: 42
 numbers:
     -   number: 0

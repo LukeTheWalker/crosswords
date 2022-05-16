@@ -26,10 +26,25 @@ public class Utils {
         }
         return res;
     }
+
     static PhysicalComposition getPhysicalComposition (String filename) throws FileNotFoundException{
         InputStream inputStream = new FileInputStream(filename);
         Yaml yaml = new Yaml(new Constructor(PhysicalComposition.class));
         PhysicalComposition obj = yaml.load(inputStream);
         return obj;
+    }
+
+    static String [][] getGrid(PhysicalComposition physicalComposition){
+        String [][] grid = new String [physicalComposition.getSize().getWidth()] [physicalComposition.getSize().getHeight()];
+        for (Coords black: physicalComposition.getBlacks())
+            grid[black.getY_cord()][black.getX_cord()] = "11";
+
+        // for (Number number: physicalComposition.getNumbers())
+        for (int i = 1; i < physicalComposition.getNumbers().size(); i++){
+            Number number = physicalComposition.getNumbers().get(i);
+            grid[number.getY_cord()][number.getX_cord()] = String.format("%02d", number.getNumber());
+        }
+        
+        return grid;
     }
 }
