@@ -205,95 +205,95 @@ numbers:
         y_cord: 3
         
     -   number: 20
-        x_cord: -1 
+        x_cord: 2
         y_cord: 4
 
     -   number: 21
-        x_cord: 0
-        y_cord: 0
+        x_cord: 10
+        y_cord: 4
         
     -   number: 22
-        x_cord: -1 
-        y_cord: -1
+        x_cord: 0
+        y_cord: 5
 
     -   number: 23
-        x_cord: 0
-        y_cord: 0
+        x_cord: 9
+        y_cord: 5
         
     -   number: 24
-        x_cord: -1 
-        y_cord: -1
+        x_cord: 2 
+        y_cord: 6
 
     -   number: 25
-        x_cord: 0
-        y_cord: 0
+        x_cord: 8
+        y_cord: 6
         
     -   number: 26
-        x_cord: -1 
-        y_cord: -1
+        x_cord: 2 
+        y_cord: 7
 
     -   number: 27
-        x_cord: 0
-        y_cord: 0
+        x_cord: 7
+        y_cord: 7
         
     -   number: 28
-        x_cord: -1 
-        y_cord: -1
+        x_cord: 13 
+        y_cord: 7
 
     -   number: 29
         x_cord: 0
-        y_cord: 0
+        y_cord: 8
         
     -   number: 30
-        x_cord: -1 
-        y_cord: -1
+        x_cord: 6 
+        y_cord: 8
 
     -   number: 31
         x_cord: 0
-        y_cord: 0
+        y_cord: 9
         
     -   number: 32
-        x_cord: -1 
-        y_cord: -1
+        x_cord: 4 
+        y_cord: 9
 
     -   number: 33
         x_cord: 0
-        y_cord: 0
+        y_cord: 10
         
     -   number: 34
-        x_cord: -1 
-        y_cord: -1
+        x_cord: 4 
+        y_cord: 10
 
     -   number: 35
-        x_cord: 0
-        y_cord: 0
+        x_cord: 12
+        y_cord: 10
         
     -   number: 36
-        x_cord: -1 
-        y_cord: -1
+        x_cord: 0 
+        y_cord: 11
 
     -   number: 37
-        x_cord: 0
-        y_cord: 0
+        x_cord: 3
+        y_cord: 11
         
     -   number: 38
-        x_cord: -1 
-        y_cord: -1
+        x_cord: 1 
+        y_cord: 11
 
     -   number: 39
-        x_cord: 0
-        y_cord: 0
+        x_cord: 2
+        y_cord: 12
         
     -   number: 40
-        x_cord: -1 
-        y_cord: -1
+        x_cord: 10 
+        y_cord: 12
 
     -   number: 41
         x_cord: 0
-        y_cord: 0
+        y_cord: 13
         
     -   number: 42
-        x_cord: 0
-        y_cord: 0
+        x_cord: 7
+        y_cord: 13
     
 #all the other (T⌓T)
