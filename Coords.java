@@ -1,17 +1,21 @@
 public class Coords {
-    private Integer x;
-    private Integer y;
+    private Integer x_cord;
+    private Integer y_cord;
 
-    Coords(Integer x, Integer y){
-        this.x = x;
-        this.y = y;
+    public Integer getX_cord() {
+        return x_cord;
+    }
+    
+    public Integer getY_cord() {
+        return y_cord;
+    }
+    
+    public void setY_cord(Integer y_cord) {
+        this.y_cord = y_cord;
+    }
+    
+    public void setX_cord(Integer x_cord) {
+        this.x_cord = x_cord;
     }
 
-    public Integer getX () {
-        return this.x;
-    }
-
-    public Integer getY () {
-        return this.y;
-    }
 }

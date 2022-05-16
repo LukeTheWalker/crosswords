@@ -1,17 +1,30 @@
 public class Number {
-    private Coords coords;
+    private Integer x_cord;
+    private Integer y_cord;
     private Integer number;
 
-    Number (Integer number, Integer x, Integer y){
-        this.coords = new Coords(x, y);
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
-    public Coords getCoords(){
-        return this.coords;
+    public Integer getY_cord() {
+        return y_cord;
     }
 
-    public Integer getNumber(){
-        return this.number;
+    public void setY_cord(Integer y_cord) {
+        this.y_cord = y_cord;
     }
+
+    public Integer getX_cord() {
+        return x_cord;
+    }
+
+    public void setX_cord(Integer x_cord) {
+        this.x_cord = x_cord;
+    }
+
 }
