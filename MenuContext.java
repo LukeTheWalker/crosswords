@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 public class MenuContext {
     private MenuState state = new MainMenuState(this);
     private Crossword c;
-    private Coords savedCoords;
+    private Coords savedCoords = new Coords(-1, -1);
 
     MenuContext(String orizzontali_filename, String verticali_filename, String physical_composition_filename) throws FileNotFoundException{
         c = new Crossword(orizzontali_filename, verticali_filename, physical_composition_filename);
