@@ -11,7 +11,8 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
 public class Utils {
-    static List<String> getSuggestions (String filename){
+    public static Scanner sc = new Scanner(System.in); 
+    public static List<String> getSuggestions (String filename){
         List<String> res = new ArrayList<>();
         try {
             File file = new File(filename);
@@ -28,14 +29,14 @@ public class Utils {
         return res;
     }
 
-    static PhysicalComposition getPhysicalComposition (String filename) throws FileNotFoundException{
+    public static PhysicalComposition getPhysicalComposition (String filename) throws FileNotFoundException{
         InputStream inputStream = new FileInputStream(filename);
         Yaml yaml = new Yaml(new Constructor(PhysicalComposition.class));
         PhysicalComposition obj = yaml.load(inputStream);
         return obj;
     }
 
-    static String [][] initializeGrid(PhysicalComposition physicalComposition){
+    public static String [][] initializeGrid(PhysicalComposition physicalComposition){
         String [][] grid = new String [physicalComposition.getSize().getWidth()] [physicalComposition.getSize().getHeight()];
         for (int i = 0; i < physicalComposition.getSize().getWidth(); i++)
             for (int j = 0; j < physicalComposition.getSize().getHeight(); j++)

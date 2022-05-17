@@ -1,18 +1,12 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class MainMenuState implements MenuState{
     public String printMenuOptions(){
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Scegli azione");
         System.out.println("Leggi definizione [S/s]");
         System.out.println("Inserisci parola [I/i]");
         
         String action = new String();
-        try { action = br.readLine(); } catch (IOException e) { e.printStackTrace(); }
-        action = action.toLowerCase().strip();
+        action = Utils.sc.nextLine().toLowerCase().strip(); 
 
         TerminalCursor.clearLines(4);
 
@@ -27,9 +21,9 @@ public class MainMenuState implements MenuState{
 
         }
         else if (action.equals("i")){
-            System.out.println("Hello world");
+            context.setState(new InsertionMenuState(new Coords()));
         }
         else
-            System.out.println("Dang la comparison non funziona");
+            System.err.println("Dang la comparison non funziona");
     }
 }

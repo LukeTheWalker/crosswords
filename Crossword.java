@@ -23,4 +23,15 @@ public class Crossword extends Subject{
             
         return suggestion; 
     }
+
+    public void updateGrid(Coords coords, String direction, String word){
+        //TODO: update grid
+        setChanged();
+        notify_observers();
+        return;
+    }
+
+    public void notify_observers() {
+        super.notify(new ObserverData(physicalComposition, grid));
+    }
 }
