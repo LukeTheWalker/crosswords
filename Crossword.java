@@ -19,7 +19,7 @@ public class Crossword extends Subject{
         for (int j = 0; j < physicalComposition.getSize().getHeight(); j++){
             for (int i = 0; i < physicalComposition.getSize().getWidth(); i++){
                 //if (grid[i][j] == null) System.out.print("   " + " ");
-                System.out.print(grid[i][j] +  " ");
+                System.out.print(grid[i][j]);
             }
             System.out.println();
         }

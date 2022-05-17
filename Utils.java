@@ -49,13 +49,13 @@ public class Utils {
             grid[number.getX_cord()][number.getY_cord()] =  convertNumberToSuperscript(String.format("%2d", number.getNumber())) + " ";
         }
         
-        grid[0][0] = grid[0][0].substring(0, grid[0][0].length()) + "S";
-        grid[1][0] = grid[0][0].substring(0, grid[0][0].length()) + "T";
-        grid[2][0] = grid[0][0].substring(0, grid[0][0].length()) + "R";
-        grid[3][0] = grid[0][0].substring(0, grid[0][0].length()) + "A";
-        grid[4][0] = grid[0][0].substring(0, grid[0][0].length()) + "P";
-        grid[5][0] = grid[0][0].substring(0, grid[0][0].length()) + "P";
-        grid[6][0] = grid[0][0].substring(0, grid[0][0].length()) + "O";
+        grid[0][0] = grid[0][0].substring(0, grid[0][0].length()-1) + "S";
+        grid[1][0] = grid[1][0].substring(0, grid[0][0].length()-1) + "T";
+        grid[2][0] = grid[2][0].substring(0, grid[0][0].length()-1) + "R";
+        grid[3][0] = grid[3][0].substring(0, grid[0][0].length()-1) + "A";
+        grid[4][0] = grid[4][0].substring(0, grid[0][0].length()-1) + "P";
+        grid[5][0] = grid[5][0].substring(0, grid[0][0].length()-1) + "P";
+        grid[6][0] = grid[6][0].substring(0, grid[0][0].length()-1) + "O";
         return grid;
     }
 
