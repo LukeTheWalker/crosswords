@@ -19,6 +19,14 @@ public class SuggestionMenuState implements MenuState{
     public void handle(String action){
         if (Utils.isNumber(action)){
             TerminalCursor.clearLines(2);
+            Number number = context.getCrossword()
+                .getPhysicalComposition()
+                .getNumbers()
+                .stream()
+                .filter(n -> n.getNumber() == Integer.parseInt(action))
+                .findAny()
+                .get();
+            context.setSavedCoords(new Coords(number.getX_cord(), number.getY_cord()));
             context.getCrossword().getSuggestion(action).printSuggestion();
         }
         else

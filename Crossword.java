@@ -3,10 +3,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Crossword extends Subject{
-    public List<String> orizzontali = new ArrayList<>();
-    public List<String> verticali = new ArrayList<>();
-    public PhysicalComposition physicalComposition;
-    public String[][] grid;
+    private List<String> orizzontali = new ArrayList<>();
+    private List<String> verticali = new ArrayList<>();
+    private PhysicalComposition physicalComposition;
+    private String[][] grid;
 
     Crossword(String orizzontali_filename, String verticali_filename, String physical_composition_filename) throws FileNotFoundException{
         orizzontali = Utils.getSuggestions(orizzontali_filename);
@@ -33,5 +33,9 @@ public class Crossword extends Subject{
 
     public void notify_observers() {
         super.notify(new ObserverData(physicalComposition, grid));
+    }
+
+    public PhysicalComposition getPhysicalComposition(){
+        return this.physicalComposition;
     }
 }

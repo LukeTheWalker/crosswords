@@ -193,7 +193,7 @@ numbers:
         y_cord: 6
         
     -   number: 26
-        x_cord: 2 
+        x_cord: 1
         y_cord: 7
 
     -   number: 27
@@ -241,7 +241,7 @@ numbers:
         y_cord: 11
         
     -   number: 38
-        x_cord: 1 
+        x_cord: 11
         y_cord: 11
 
     -   number: 39
