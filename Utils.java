@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 import org.yaml.snakeyaml.Yaml;
@@ -34,62 +35,31 @@ public class Utils {
         return obj;
     }
 
-    static String [][] getGrid(PhysicalComposition physicalComposition){
+    static String [][] initializeGrid(PhysicalComposition physicalComposition){
         String [][] grid = new String [physicalComposition.getSize().getWidth()] [physicalComposition.getSize().getHeight()];
         for (int i = 0; i < physicalComposition.getSize().getWidth(); i++)
             for (int j = 0; j < physicalComposition.getSize().getHeight(); j++)
-                grid[i][j] = "   ";
+                grid[i][j] = " ";
         for (Coords black: physicalComposition.getBlacks())
-            grid[black.getX_cord()][black.getY_cord()] = "███";
+            grid[black.getX_cord()][black.getY_cord()] = "█";
 
         // for (Number number: physicalComposition.getNumbers())
-        for (int i = 1; i < physicalComposition.getNumbers().size(); i++){
-            Number number = physicalComposition.getNumbers().get(i);
-            //grid[number.getY_cord()][number.getX_cord()] = String.format("%02d", number.getNumber());
-            grid[number.getX_cord()][number.getY_cord()] =  convertNumberToSuperscript(String.format("%2d", number.getNumber())) + " ";
-        }
+        // for (int i = 1; i < physicalComposition.getNumbers().size(); i++){
+        //     Number number = physicalComposition.getNumbers().get(i);
+        //     //grid[number.getY_cord()][number.getX_cord()] = String.format("%02d", number.getNumber());
+        //     grid[number.getX_cord()][number.getY_cord()] =  convertNumberToSuperscript(String.format("%2d", number.getNumber())) + " ";
+        // }
         
-        grid[0][0] = grid[0][0].substring(0, grid[0][0].length()-1) + "S";
-        grid[1][0] = grid[1][0].substring(0, grid[0][0].length()-1) + "T";
-        grid[2][0] = grid[2][0].substring(0, grid[0][0].length()-1) + "R";
-        grid[3][0] = grid[3][0].substring(0, grid[0][0].length()-1) + "A";
-        grid[4][0] = grid[4][0].substring(0, grid[0][0].length()-1) + "P";
-        grid[5][0] = grid[5][0].substring(0, grid[0][0].length()-1) + "P";
-        grid[6][0] = grid[6][0].substring(0, grid[0][0].length()-1) + "O";
+        // grid[0][0] = grid[0][0].substring(0, grid[0][0].length()-1) + "S";
+        // grid[1][0] = grid[1][0].substring(0, grid[0][0].length()-1) + "T";
+        // grid[2][0] = grid[2][0].substring(0, grid[0][0].length()-1) + "R";
+        // grid[3][0] = grid[3][0].substring(0, grid[0][0].length()-1) + "A";
+        // grid[4][0] = grid[4][0].substring(0, grid[0][0].length()-1) + "P";
+        // grid[5][0] = grid[5][0].substring(0, grid[0][0].length()-1) + "P";
+        // grid[6][0] = grid[6][0].substring(0, grid[0][0].length()-1) + "O";
         return grid;
     }
 
-    // static Character convertFigureToSuperScript(Character n){
-    //     switch (n){
-    //         case '1':
-    //             return '₁';
-    //         case '2':
-    //             return '₂';
-    //         case '3':
-    //             return '₃';
-    //         case '4':
-    //             return '₄';
-    //         case '5':
-    //             return '₅';
-    //         case '6':
-    //             return '₆';
-    //         case '7':
-    //             return '₇';
-    //         case '8':
-    //             return '₈';
-    //         case '9':
-    //             return '₉';
-    //         case '0':
-    //             return '₀';
-    //     }
-    //     return 'f';
-    // }
-    // static String convertNumberToSuperscript(String numberString){
-    //     String res = "";
-    //     for (Character n : numberString.toCharArray())
-    //         res += convertFigureToSuperScript(n);
-    //     return res;
-    // }
     public static String convertNumberToSuperscript(String numberString) {
         numberString = numberString.replaceAll("0", "⁰");
         numberString = numberString.replaceAll("1", "¹");
@@ -102,5 +72,29 @@ public class Utils {
         numberString = numberString.replaceAll("8", "⁸");
         numberString = numberString.replaceAll("9", "⁹");         
         return numberString;
+    }
+
+    public static String getMatchingElement(List<String> lst, String text){
+        String pattern = ".*" + text + ".*";
+        //System.out.println(pattern);
+        
+        try {
+            return lst
+                .stream()
+                .filter(str -> str.matches(pattern))
+                .findAny()
+                .get();
+        } catch (NoSuchElementException e) {
+            return null;
+        }
+    }
+
+    public static Boolean isNumber(String number){
+        try {  
+            Integer.parseInt(number);  
+            return true;
+          } catch(NumberFormatException e){  
+            return false;  
+          }
     }
 }

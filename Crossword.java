@@ -12,17 +12,15 @@ public class Crossword extends Subject{
         orizzontali = Utils.getSuggestions(orizzontali_filename);
         verticali = Utils.getSuggestions(verticali_filename);
         physicalComposition = Utils.getPhysicalComposition(physical_composition_filename);
-        grid = Utils.getGrid(physicalComposition);
+        grid = Utils.initializeGrid(physicalComposition);
     }
 
-    public void showGrid(){
-        for (int j = 0; j < physicalComposition.getSize().getHeight(); j++){
-            for (int i = 0; i < physicalComposition.getSize().getWidth(); i++){
-                //if (grid[i][j] == null) System.out.print("   " + " ");
-                System.out.print(grid[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();
+    public Suggestion getSuggestion(String number){
+        Suggestion suggestion = new Suggestion();
+
+        suggestion.setHorizontalSuggestion(Utils.getMatchingElement(orizzontali, " " + number + "\\."));
+        suggestion.setVerticalSuggestion(Utils.getMatchingElement(verticali, " " + number + "\\.")); 
+            
+        return suggestion; 
     }
 }
