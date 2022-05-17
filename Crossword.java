@@ -33,10 +33,24 @@ public class Crossword extends Subject{
     }
 
     private boolean insertWord(Coords coords, String direction, String word){
+        int x = coords.getX_cord();
+        int y = coords.getY_cord();
+        if(direction == "o"){
+            if(x+word.length() > this.physicalComposition.getSize().getWidth()) return false;
+        }else{
+            if(y+word.length() > this.physicalComposition.getSize().getHeight()) return false;
+        }
         for(int i = 0; i < word.length(); i++){
-            if(!insertLetter(coords, word.charAt(i))) return false;
-            if(direction == "horizontal") coords.setY_cord(coords.getY_cord()+1);
-            else coords.setX_cord(coords.getX_cord()+1);
+            if(direction == "o"){
+                if(grid[x+i][y] == "█") return false;
+            }else{
+                if(grid[x][y+i] == "█") return false;
+            }
+        }
+        for(int i = 0; i < word.length(); i++){
+            insertLetter(coords, word.charAt(i));
+            if(direction == "o") y++;
+            else x++;
         }
         return true;
     }
