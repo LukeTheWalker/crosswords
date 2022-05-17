@@ -16,12 +16,13 @@ public class Crossword extends Subject{
     }
 
     public void showGrid(){
-        for (int i = 0; i < physicalComposition.getSize().getWidth(); i++){
-            for (int j = 0; j < physicalComposition.getSize().getHeight(); j++){
-                if (grid[i][j] == null) System.out.print("00" + " ");
-                else System.out.print(grid[i][j] + " ");
+        for (int j = 0; j < physicalComposition.getSize().getHeight(); j++){
+            for (int i = 0; i < physicalComposition.getSize().getWidth(); i++){
+                //if (grid[i][j] == null) System.out.print("   " + " ");
+                System.out.print(grid[i][j] +  " ");
             }
             System.out.println();
         }
+        System.out.println();
     }
 }
