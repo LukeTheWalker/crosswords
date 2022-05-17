@@ -24,8 +24,28 @@ public class Crossword extends Subject{
         return suggestion; 
     }
 
+    private boolean insertLetter(Coords coords, char c){
+        if(grid[coords.getX_cord()][coords.getY_cord()] == "█") return false;
+        else{
+            grid[coords.getX_cord()][coords.getY_cord()] = String.valueOf(c);
+        }
+        return true;
+    }
+
+    private boolean insertWord(Coords coords, String direction, String word){
+        for(int i = 0; i < word.length(); i++){
+            if(!insertLetter(coords, word.charAt(i))) return false;
+            if(direction == "horizontal") coords.setY_cord(coords.getY_cord()+1);
+            else coords.setX_cord(coords.getX_cord()+1);
+        }
+        return true;
+    }
+
     public void updateGrid(Coords coords, String direction, String word){
-        //TODO: update grid
+        if(!insertWord(coords, direction, word)){
+            System.out.println("error inserting word");
+            return;
+        };
         setChanged();
         notify_observers();
         return;
