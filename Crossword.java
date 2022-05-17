@@ -24,33 +24,30 @@ public class Crossword extends Subject{
         return suggestion; 
     }
 
-    private boolean insertLetter(Coords coords, char c){
-        if(grid[coords.getX_cord()][coords.getY_cord()] == "█") return false;
-        else{
-            grid[coords.getX_cord()][coords.getY_cord()] = String.valueOf(c);
-        }
-        return true;
+    private void insertLetter(int x, int y, char c){
+        grid[x][y] = String.valueOf(c);
+        return;
     }
 
     private boolean insertWord(Coords coords, String direction, String word){
         int x = coords.getX_cord();
         int y = coords.getY_cord();
-        if(direction == "o"){
+        if(direction.equals("o")){
             if(x+word.length() > this.physicalComposition.getSize().getWidth()) return false;
         }else{
             if(y+word.length() > this.physicalComposition.getSize().getHeight()) return false;
         }
         for(int i = 0; i < word.length(); i++){
-            if(direction == "o"){
+            if(direction.equals("o")){
                 if(grid[x+i][y] == "█") return false;
             }else{
                 if(grid[x][y+i] == "█") return false;
             }
         }
         for(int i = 0; i < word.length(); i++){
-            insertLetter(coords, word.charAt(i));
-            if(direction == "o") y++;
-            else x++;
+            insertLetter(x, y, word.charAt(i));
+            if(direction.equals("o")) x++;
+            else y++;
         }
         return true;
     }

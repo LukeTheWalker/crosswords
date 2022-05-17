@@ -21,10 +21,8 @@ public class MenuContext {
 
     public void start() {
         while (true){
-
             String action = state.printMenuOptions();
             state.handle(action);
-        
         }
     }
 
