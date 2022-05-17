@@ -57,7 +57,7 @@ public class InsertionMenuState implements MenuState{
         String typeOfWord;
         String word, answer;
         
-        if (context.getSavedCoords().getX_cord() != null){
+        if (context.getSavedCoords().getX_cord() != -1){
             System.out.print("Sono state trovate delle coordinate precedentemente salvate " + context.getSavedCoords().toString() + ", si desidera utilizzarle? [y/n]: ");
             answer = Utils.sc.nextLine().toLowerCase().strip();
             if (answer.toLowerCase().equals("y"))
