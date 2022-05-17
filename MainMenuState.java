@@ -1,4 +1,9 @@
 public class MainMenuState implements MenuState{
+    private MenuContext context;
+    public MainMenuState(MenuContext context) {
+        this.context = context;
+    }
+
     public String printMenuOptions(){
 
         System.out.println("Scegli azione");
@@ -13,15 +18,15 @@ public class MainMenuState implements MenuState{
         return action;
     }
 
-    public void handle(MenuContext context, String action){
+    public void handle(String action){
         if (action.equals("s")){
-            context.setState(new SuggestionMenuState());
+            context.setState(new SuggestionMenuState(context));
             // System.out.println("Scegli il numero da visualizzare");
             // System.out.println("Back [B/b]");
 
         }
         else if (action.equals("i")){
-            context.setState(new InsertionMenuState(new Coords()));
+            context.setState(new InsertionMenuState(context));
         }
         else
             System.err.println("Dang la comparison non funziona");

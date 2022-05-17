@@ -1,4 +1,4 @@
 interface MenuState {
-    void handle(MenuContext context, String action);
+    void handle(String action);
     String printMenuOptions();
 }

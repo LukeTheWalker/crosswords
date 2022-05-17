@@ -1,4 +1,10 @@
 public class SuggestionMenuState implements MenuState{
+    private MenuContext context;
+    
+    public SuggestionMenuState(MenuContext context) {
+        this.context = context;
+    }
+
     public String printMenuOptions(){
 
         System.out.println("Scegli il numero da visualizzare");
@@ -10,13 +16,13 @@ public class SuggestionMenuState implements MenuState{
         TerminalCursor.clearLines(3);
         return action;
     }
-    public void handle(MenuContext context, String action){
+    public void handle(String action){
         if (Utils.isNumber(action)){
             TerminalCursor.clearLines(2);
             context.getCrossword().getSuggestion(action).printSuggestion();
         }
         else
             System.err.print("Dang la comparison non funziona");
-        context.setState(new MainMenuState());
+        context.setState(new MainMenuState(context));
     }
 }
