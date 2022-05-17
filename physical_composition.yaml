@@ -1,7 +1,7 @@
 size: 
     width: 14
     height: 14
-n_blacks: 28
+
 blacks:
     -   x_cord: 0
         y_cord: 7
@@ -87,7 +87,6 @@ blacks:
     -   x_cord: 13
         y_cord: 6
 
-n_numbers: 42
 numbers:
     -   number: 0
         x_cord: -1 
