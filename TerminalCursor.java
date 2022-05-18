@@ -1,5 +1,3 @@
-import java.util.concurrent.CountDownLatch;
-
 public class TerminalCursor {
     private static final String ESC = "\033[";
     public static void clearLines (Integer n){

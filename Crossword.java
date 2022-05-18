@@ -87,7 +87,7 @@ public class Crossword extends Subject{
         if(!insertWord(coords, direction, word)){
             System.out.println("error inserting word");
             return;
-        };
+        }
         setChanged();
         notify_observers();
         return;
