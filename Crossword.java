@@ -1,7 +1,7 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PrimitiveIterator;
+
 import java.util.stream.IntStream;
 
 public class Crossword extends Subject{
@@ -26,62 +26,33 @@ public class Crossword extends Subject{
         return suggestion; 
     }
 
-    private void insertLetter(int x, int y, char c){
-        grid[x][y] = String.valueOf(c);
+    private void insertLetter(Coords coord, char c){
+        grid[coord.getX_cord()][coord.getY_cord()] = String.valueOf(c);
         return;
     }
 
-    private boolean insertWord(Coords coords, String direction, String word){
-        int x = coords.getX_cord();
-        int y = coords.getY_cord();
-        IntStream stream = IntStream.rangeClosed(0, word.length()-1);
-        IntStream stream2 = IntStream.rangeClosed(0, word.length()-1);
-        PrimitiveIterator.OfInt answer = stream.iterator();
-        if(direction == "o"){
-            if(x+word.length() <= this.physicalComposition.getSize().getWidth()){
-                while(answer.hasNext()){
-                    if(grid[x+answer.nextInt()][y] == "█") return false;
-                }
-            }
-            stream2.forEach(i -> {
-                insertLetter(x+i, y, word.charAt(i));
-            });
-        }else{
-            if(y+word.length() <= this.physicalComposition.getSize().getHeight()){
-               while(answer.hasNext()){
-                if(grid[x][y+answer.nextInt()] == "█") return false;
-               }
-            }
-            stream2.forEach(i -> {
-                insertLetter(x, y+i, word.charAt(i));
-            });
-        }
-        return true;
+    private Boolean checkInsertion(Coords coords){
+        int width = this.physicalComposition.getSize().getWidth();
+        int heigth = this.physicalComposition.getSize().getHeight();
+        if((coords.getX_cord() >=  width) || (coords.getY_cord() >=  heigth)) return false;
+
+        return !grid[coords.getX_cord()][coords.getY_cord()].equals("█");
     }
 
+    private Boolean insertWord(Coords coords, String direction, String word){
+        int x = coords.getX_cord();
+        int y = coords.getY_cord();
+        int isOrizzontale = direction.equals("o") ? 1 : 0;
+        Boolean isValid = IntStream.range(0, word.length())
+                                    .mapToObj(i -> new Coords(x + i * isOrizzontale, y + i * (1 - isOrizzontale) ))
+                                    .allMatch(coord -> (checkInsertion(coords)));
 
-    // private boolean insertWord(Coords coords, String direction, String word){
-    //     int x = coords.getX_cord();
-    //     int y = coords.getY_cord();
-    //     if(direction.equals("o")){
-    //         if(x+word.length() > this.physicalComposition.getSize().getWidth()) return false;
-    //     }else{
-    //         if(y+word.length() > this.physicalComposition.getSize().getHeight()) return false;
-    //     }
-    //     for(int i = 0; i < word.length(); i++){
-    //         if(direction.equals("o")){
-    //             if(grid[x+i][y] == "█") return false;
-    //         }else{
-    //             if(grid[x][y+i] == "█") return false;
-    //         }
-    //     }
-    //     for(int i = 0; i < word.length(); i++){
-    //         insertLetter(x, y, word.charAt(i));
-    //         if(direction.equals("o")) x++;
-    //         else y++;
-    //     }
-    //     return true;
-    // }
+        if (isValid)
+            for (int i = 0; i < word.length(); i++)
+                insertLetter(new Coords(x + i * isOrizzontale, y + i * (1 - isOrizzontale)), word.charAt(i));
+
+        return isValid;
+    }
 
     public void updateGrid(Coords coords, String direction, String word){
         if(!insertWord(coords, direction, word)){
