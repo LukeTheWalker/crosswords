@@ -9,6 +9,11 @@ public class TerminalCursor {
 
         cursorUp(n);
     }
+
+    public static void setCursorPosition(int row, int column){
+        System.out.print(ESC+row+";"+column+"f");
+    }
+
     public static void cursorUp(Integer n){
         System.out.print("\r");
         System.out.print(ESC + Integer.toString(n) + "A");
