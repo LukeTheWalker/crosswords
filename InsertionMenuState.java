@@ -73,7 +73,7 @@ public class InsertionMenuState implements MenuState{
             while (true) {
                 System.out.print("Inserisci coordinata x: ");
                 String response = Utils.sc.nextLine().strip(); 
-                if (Utils.isNumber(response))
+                if (Utils.isNumber(response) && Integer.parseInt(response) > 0)
                     return Integer.parseInt(response);
                 TerminalCursor.clearLines(1);
             }
@@ -87,7 +87,7 @@ public class InsertionMenuState implements MenuState{
             while (true) {
                 System.out.print("Inserisci coordinata y: ");
                 String response = Utils.sc.nextLine().strip(); 
-                if (Utils.isNumber(response))
+                if (Utils.isNumber(response) && Integer.parseInt(response) > 0)
                     return Integer.parseInt(response);
                 TerminalCursor.clearLines(1);
             }
