@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class InsertionMenuState implements MenuState{
     private MenuContext context;
     public InsertionMenuState(MenuContext context) {
@@ -52,9 +54,9 @@ public class InsertionMenuState implements MenuState{
     private Boolean handleSavedCoords(){         
         if (context.getSavedCoords().getX_cord() != -1){    
             while (true){                
-                System.out.print("Sono state trovate delle coordinate precedentemente salvate " + context.getSavedCoords().toString() + ", si desidera utilizzarle? [y/n]: ");
+                System.out.print("Sono state trovate delle coordinate precedentemente salvate " + context.getSavedCoords().toString() + ", si desidera utilizzarle? [Y/n]: ");
                 String answer = Utils.sc.nextLine().toLowerCase().strip();
-                if (answer.equals("y")) 
+                if (answer.equals("y") || answer.equals("")) 
                     return true;
                 else if (answer.equals("n"))
                     return false;
@@ -67,41 +69,33 @@ public class InsertionMenuState implements MenuState{
     } 
 
     private Integer getXCoordinate(Boolean saved_coords_found){
+        System.out.print("Inserisci coordinata x: ");
         if (saved_coords_found)
             System.out.println(context.getSavedCoords().getX_cord());
         else 
             while (true) {
-                System.out.print("Inserisci coordinata x: ");
                 String response = Utils.sc.nextLine().strip(); 
-                if (Utils.isNumber(response) && Integer.parseInt(response) > 0)
+                if (Utils.isNumber(response) && Integer.parseInt(response) >= 0)
                     return Integer.parseInt(response);
                 TerminalCursor.clearLines(1);
+                System.out.print("Inserisci coordinata x: ");
             }
         return context.getSavedCoords().getX_cord();
     }
 
     private Integer getYCoordinate(Boolean saved_coords_found){
+        System.out.print("Inserisci coordinata y: ");
         if (saved_coords_found)
             System.out.println(context.getSavedCoords().getY_cord());
         else 
             while (true) {
-                System.out.print("Inserisci coordinata y: ");
                 String response = Utils.sc.nextLine().strip(); 
-                if (Utils.isNumber(response) && Integer.parseInt(response) > 0)
+                if (Utils.isNumber(response) && Integer.parseInt(response) >= 0)
                     return Integer.parseInt(response);
                 TerminalCursor.clearLines(1);
+                System.out.print("Inserisci coordinata y: ");
             }
         return context.getSavedCoords().getY_cord();
-    }
-
-    private String getTypeOfWord(){
-        while (true){                
-            System.out.print("Vuoi inserire una parola Verticale o Orizzontale? [v/o]: ");
-            String answer = Utils.sc.nextLine().toLowerCase().strip();
-            if ( answer.equals("v") || answer.equals("o") )
-                return answer;
-            TerminalCursor.clearLines(1);
-        }
     }
 
     public String printMenuOptions(){
@@ -119,7 +113,7 @@ public class InsertionMenuState implements MenuState{
         Integer new_y = getYCoordinate(saved_coords_found);
         context.getSavedCoords().setY_cord(new_y); 
 
-        typeOfWord = getTypeOfWord();
+        typeOfWord = getValidInput("Vuoi inserire una parola Verticale o Orizzontale? [V/o]: ", List.of("v", "o"), "v");
 
         System.out.print("Inserisci la parola da scrivere: ");
         word = Utils.sc.nextLine().strip();
@@ -130,8 +124,8 @@ public class InsertionMenuState implements MenuState{
 
         return context.getSavedCoords().toString() + ":" + typeOfWord + ":" + word;
     }
-    public void handle(String action){
-        String[] arguments = action.split(":");
+    public void handle(String insertion){
+        String[] arguments = insertion.split(":");
         int x_cord = Integer.parseInt(arguments[0].split(" ")[0]);
         int y_cord = Integer.parseInt(arguments[0].split(" ")[1]);
         String direction = arguments[1];

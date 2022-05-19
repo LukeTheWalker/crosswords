@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class MainMenuState implements MenuState{
     private MenuContext context;
     public MainMenuState(MenuContext context) {
@@ -7,12 +9,11 @@ public class MainMenuState implements MenuState{
     public String printMenuOptions(){
 
         System.out.println("Scegli azione");
-        System.out.println("Leggi definizione [S/s]");
-        System.out.println("Inserisci parola [I/i]");
+        System.out.println("Leggi definizione [s]");
+        System.out.println("Inserisci parola  [i]");
         
-        String action = new String();
-        action = Utils.sc.nextLine().toLowerCase().strip(); 
-
+        String action = getValidInput("action [S/i]: ", List.of("s", "i"), "s");
+        
         TerminalCursor.clearLines(4);
 
         return action;

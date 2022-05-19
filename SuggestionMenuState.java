@@ -5,17 +5,27 @@ public class SuggestionMenuState implements MenuState{
         this.context = context;
     }
 
+    private String getValidSuggestionNumber(){
+        while (true) {
+            String response = Utils.sc.nextLine().strip(); 
+            if ((Utils.isNumber(response) && Integer.parseInt(response) > 0))
+                return response;
+            else if (response.equals("b") || response.equals(""))
+                return "b";
+            TerminalCursor.clearLines(1);
+        }
+    }
     public String printMenuOptions(){
 
         System.out.println("Scegli il numero da visualizzare");
-        System.out.println("Back [B/b]");
+        System.out.println("Back [b]");
         
-        String action = new String();
-        action = Utils.sc.nextLine().toLowerCase().strip();;     
+        String action = getValidSuggestionNumber();     
 
         TerminalCursor.clearLines(3);
         return action;
     }
+
     public void handle(String action){
         if (Utils.isNumber(action)){
             TerminalCursor.clearLines(2);
