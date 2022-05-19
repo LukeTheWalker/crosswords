@@ -2,6 +2,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.stream.IntStream;
+
 public class Crossword extends Subject{
     private List<String> orizzontali = new ArrayList<>();
     private List<String> verticali = new ArrayList<>();
@@ -32,11 +34,39 @@ public class Crossword extends Subject{
         return suggestion; 
     }
 
+    private void insertLetter(Coords coord, char c){
+        grid[coord.getX_cord()][coord.getY_cord()] = String.valueOf(c);
+    }
+
+    private Boolean checkInsertion(Coords coords){
+        int width = this.physicalComposition.getSize().getWidth();
+        int height = this.physicalComposition.getSize().getHeight();
+        if((coords.getX_cord() >=  width) || (coords.getY_cord() >=  height)) return false;
+
+        return !grid[coords.getX_cord()][coords.getY_cord()].equals("█");
+    }
+
+    private Boolean insertWord(Coords coords, String direction, String word){
+        int x = coords.getX_cord();
+        int y = coords.getY_cord();
+        int isOrizzontale = direction.equals("o") ? 1 : 0;
+        Boolean isValid = IntStream.range(0, word.length())
+                                    .mapToObj(i -> new Coords(x + i * isOrizzontale, y + i * (1 - isOrizzontale) ))
+                                    .allMatch(coord -> (checkInsertion(coords)));
+
+        if (isValid)
+            for (int i = 0; i < word.length(); i++)
+                insertLetter(new Coords(x + i * isOrizzontale, y + i * (1 - isOrizzontale)), word.charAt(i));
+
+        return isValid;
+    }
+
     public void updateGrid(Coords coords, String direction, String word){
-        //TODO: update grid
-        setChanged();
-        notify_observers();
-        return;
+        if(!insertWord(coords, direction, word)){
+            System.out.println("error inserting word");
+            setChanged();
+            notify_observers();
+        }
     }
 
     public void notify_observers() {

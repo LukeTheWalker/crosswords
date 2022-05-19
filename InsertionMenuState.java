@@ -122,7 +122,7 @@ public class InsertionMenuState extends AbstractMenuState{
             String direction = arguments[1];
             String word = arguments[2];
             Coords coords = new Coords(x_cord, y_cord);
-            //context.getCrossword().updateGrid(coords, direction, word);
+            context.getCrossword().updateGrid(coords, direction, word);
             context.setState(new MainMenuState(context));
         }
     }
