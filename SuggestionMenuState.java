@@ -8,13 +8,14 @@ public class SuggestionMenuState implements MenuState{
     private String getValidSuggestionNumber(){
         while (true) {
             String response = Utils.sc.nextLine().strip(); 
-            if ((Utils.isNumber(response) && Integer.parseInt(response) > 0))
+            if ((Utils.isNumber(response) && context.validateNumber(Integer.parseInt(response))))
                 return response;
             else if (response.equals("b") || response.equals(""))
                 return "b";
             TerminalCursor.clearLines(1);
         }
     }
+
     public String printMenuOptions(){
 
         System.out.println("Scegli il numero da visualizzare");
@@ -29,18 +30,15 @@ public class SuggestionMenuState implements MenuState{
     public void handle(String action){
         if (Utils.isNumber(action)){
             TerminalCursor.clearLines(2);
-            Number number = context.getCrossword()
-                .getPhysicalComposition()
-                .getNumbers()
-                .stream()
-                .filter(n -> n.getNumber() == Integer.parseInt(action))
-                .findAny()
-                .get();
+            
+            Suggestion suggestion = context.getCrossword().getSuggestion(action);
+            Number number = suggestion.getNumber();
+
             context.setSavedCoords(new Coords(number.getX_cord(), number.getY_cord()));
-            context.getCrossword().getSuggestion(action).printSuggestion();
+            suggestion.printSuggestion();
         }
         else
             System.err.print("Dang la comparison non funziona");
-        context.setState(new MainMenuState(context));
+        context.setState(new InsertionMenuState(context));
     }
 }

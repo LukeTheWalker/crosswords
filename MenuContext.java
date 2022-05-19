@@ -39,4 +39,15 @@ public class MenuContext {
     public void setState(MenuState state) {
         this.state = state;
     }
+
+    public Boolean validateNumber(int n){
+        return c.getPhysicalComposition().getNumbers().stream().anyMatch(num -> num.getNumber() >= n);
+    }
+
+    public Boolean validateCoords(Coords coords){
+        return coords.getX_cord() < c.getPhysicalComposition().getSize().getWidth()  &&
+               coords.getY_cord() < c.getPhysicalComposition().getSize().getHeight() &&
+               coords.getX_cord() >= 0 &&
+               coords.getY_cord() >= 0;
+    }
 }

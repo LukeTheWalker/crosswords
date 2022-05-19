@@ -1,6 +1,7 @@
 public class Suggestion {
     private String verticalSuggestion;
     private String horizontalSuggestion;
+    private Number number;
 
     // Suggestion (String verticalSuggestion, String horizontalSuggestion){
     //     this.setVerticalSuggestion(verticalSuggestion);
@@ -9,6 +10,14 @@ public class Suggestion {
 
     public String getHorizontalSuggestion() {
         return horizontalSuggestion;
+    }
+
+    public Number getNumber() {
+        return number;
+    }
+
+    public void setNumber(Number number) {
+        this.number = number;
     }
 
     public void setHorizontalSuggestion(String horizontalSuggestion) {

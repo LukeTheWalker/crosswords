@@ -15,11 +15,19 @@ public class Crossword extends Subject{
         grid = Utils.initializeGrid(physicalComposition);
     }
 
-    public Suggestion getSuggestion(String number){
+    public Suggestion getSuggestion(String number_string){
         Suggestion suggestion = new Suggestion();
+        Number number = this
+                    .getPhysicalComposition()
+                    .getNumbers()
+                    .stream()
+                    .filter(n -> n.getNumber() == Integer.parseInt(number_string))
+                    .findAny()
+                    .get();
 
-        suggestion.setHorizontalSuggestion(Utils.getMatchingElement(orizzontali, " " + number + "\\."));
-        suggestion.setVerticalSuggestion(Utils.getMatchingElement(verticali, " " + number + "\\.")); 
+        suggestion.setNumber(number);
+        suggestion.setHorizontalSuggestion(Utils.getMatchingElement(orizzontali, " " + number_string + "\\."));
+        suggestion.setVerticalSuggestion(Utils.getMatchingElement(verticali, " " + number_string + "\\.")); 
             
         return suggestion; 
     }
