@@ -1,12 +1,12 @@
 import java.util.List;
 
-public class InsertionMenuState implements MenuState{
-    private MenuContext context;
+public class InsertionMenuState extends AbstractMenuState{
     public InsertionMenuState(MenuContext context) {
         this.context = context;
     }
 
-    private Boolean handleSavedCoords(){       
+    private Boolean handleSavedCoords(){      
+        numberOfLinesWritten++; 
         if (context.getSavedCoords().getX_cord() != -1){    
             while (true){                
                 System.out.print("Sono state trovate delle coordinate precedentemente salvate " + context.getSavedCoords().toString() + ", si desidera utilizzarle? [Y/n]: ");
@@ -55,6 +55,7 @@ public class InsertionMenuState implements MenuState{
 
     private Coords getNewCoords(Boolean saved_coords_found){
         Integer new_x, new_y;
+        numberOfLinesWritten += 2;
         while (true){
             new_x = getXCoordinate(saved_coords_found);
             new_y = getYCoordinate(saved_coords_found);
@@ -70,12 +71,13 @@ public class InsertionMenuState implements MenuState{
     }
 
     private Boolean askForSuggestion(){
+        numberOfLinesWritten++;
         String wantSuggestion = getValidInput("Vorresti leggere una suggestion? [Y/n]: ", List.of("y", "n"), "y");
         return wantSuggestion.equals("y");
     }
 
     public String printMenuOptions(){
-
+        numberOfLinesWritten++;
         System.out.println("Inserisci i dati richiesti per procedere all'inserimento");
         Boolean saved_coords_found = false;
         String typeOfWord;
@@ -96,14 +98,16 @@ public class InsertionMenuState implements MenuState{
         // Integer new_y = getYCoordinate(saved_coords_found);
         // context.getSavedCoords().setY_cord(new_y); 
 
+        numberOfLinesWritten++;
         typeOfWord = getValidInput("Vuoi inserire una parola Verticale o Orizzontale? [V/o]: ", List.of("v", "o"), "v");
 
+        numberOfLinesWritten++;
         System.out.print("Inserisci la parola da scrivere: ");
         word = Utils.sc.nextLine().strip();
 
         //System.out.println(context.getSavedCoords().toString() + ":" + typeOfWord + ":" + word);
 
-        TerminalCursor.clearLines(6);
+        TerminalCursor.clearLines(numberOfLinesWritten);
 
         return context.getSavedCoords().toString() + ":" + typeOfWord + ":" + word;
     }

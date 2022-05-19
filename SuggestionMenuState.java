@@ -1,6 +1,4 @@
-public class SuggestionMenuState implements MenuState{
-    private MenuContext context;
-    
+public class SuggestionMenuState extends AbstractMenuState{
     public SuggestionMenuState(MenuContext context) {
         this.context = context;
     }
@@ -18,12 +16,14 @@ public class SuggestionMenuState implements MenuState{
 
     public String printMenuOptions(){
 
+        numberOfLinesWritten += 3;
+
         System.out.println("Scegli il numero da visualizzare");
         System.out.println("Back [b]");
         
         String action = getValidSuggestionNumber();     
 
-        TerminalCursor.clearLines(3);
+        TerminalCursor.clearLines(numberOfLinesWritten);
         return action;
     }
 

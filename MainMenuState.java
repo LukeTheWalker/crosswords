@@ -1,12 +1,13 @@
 import java.util.List;
 
-public class MainMenuState implements MenuState{
-    private MenuContext context;
+public class MainMenuState extends AbstractMenuState{
     public MainMenuState(MenuContext context) {
         this.context = context;
     }
 
     public String printMenuOptions(){
+
+        numberOfLinesWritten += 4;
 
         System.out.println("Scegli azione");
         System.out.println("Leggi definizione [s]");
@@ -14,7 +15,7 @@ public class MainMenuState implements MenuState{
         
         String action = getValidInput("action [S/i]: ", List.of("s", "i"), "s");
         
-        TerminalCursor.clearLines(4);
+        TerminalCursor.clearLines(numberOfLinesWritten);
 
         return action;
     }
