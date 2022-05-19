@@ -28,13 +28,12 @@ public class Crossword extends Subject{
 
     private void insertLetter(Coords coord, char c){
         grid[coord.getX_cord()][coord.getY_cord()] = String.valueOf(c);
-        return;
     }
 
     private Boolean checkInsertion(Coords coords){
         int width = this.physicalComposition.getSize().getWidth();
-        int heigth = this.physicalComposition.getSize().getHeight();
-        if((coords.getX_cord() >=  width) || (coords.getY_cord() >=  heigth)) return false;
+        int height = this.physicalComposition.getSize().getHeight();
+        if((coords.getX_cord() >=  width) || (coords.getY_cord() >=  height)) return false;
 
         return !grid[coords.getX_cord()][coords.getY_cord()].equals("█");
     }
@@ -57,11 +56,9 @@ public class Crossword extends Subject{
     public void updateGrid(Coords coords, String direction, String word){
         if(!insertWord(coords, direction, word)){
             System.out.println("error inserting word");
-            return;
+            setChanged();
+            notify_observers();
         }
-        setChanged();
-        notify_observers();
-        return;
     }
 
     public void notify_observers() {
