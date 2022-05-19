@@ -52,7 +52,7 @@ public class Crossword extends Subject{
         int isOrizzontale = direction.equals("o") ? 1 : 0;
         Boolean isValid = IntStream.range(0, word.length())
                                     .mapToObj(i -> new Coords(x + i * isOrizzontale, y + i * (1 - isOrizzontale) ))
-                                    .allMatch(coord -> (checkInsertion(coords)));
+                                    .allMatch(newLetterCoords -> (checkInsertion(newLetterCoords)));
 
         if (isValid)
             for (int i = 0; i < word.length(); i++)
@@ -62,12 +62,12 @@ public class Crossword extends Subject{
     }
 
     public void updateGrid(Coords coords, String direction, String word){
-        if(insertWord(coords, direction, word)){
+        if(!insertWord(coords, direction, word)){
+            System.out.println("error inserting word");
+        }else{
             setChanged();
             notify_observers();
         }
-        else 
-            System.out.println("error inserting word");
     }
 
     public void notify_observers() {
