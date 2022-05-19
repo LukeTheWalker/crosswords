@@ -62,11 +62,12 @@ public class Crossword extends Subject{
     }
 
     public void updateGrid(Coords coords, String direction, String word){
-        if(!insertWord(coords, direction, word)){
-            System.out.println("error inserting word");
+        if(insertWord(coords, direction, word)){
             setChanged();
             notify_observers();
         }
+        else 
+            System.out.println("error inserting word");
     }
 
     public void notify_observers() {
