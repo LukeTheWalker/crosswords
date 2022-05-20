@@ -1,8 +1,9 @@
 import java.util.List;
 
 public class MainMenuState extends AbstractMenuState{
-    public MainMenuState(MenuContext context) {
-        this.context = context;
+    public MainMenuState(Coords contextSavedCoords, Crossword crossword) {
+        this.contextSavedCoords = contextSavedCoords;
+        this.crossword = crossword;
     }
 
     public String printMenuOptions(){
@@ -20,17 +21,15 @@ public class MainMenuState extends AbstractMenuState{
         return action;
     }
 
-    public void handle(String action){
+    public MenuState handle(String action){
         if (action.equals("s")){
-            context.setState(new SuggestionMenuState(context));
-            // System.out.println("Scegli il numero da visualizzare");
-            // System.out.println("Back [B/b]");
-
+            return new SuggestionMenuState(contextSavedCoords, crossword);
         }
         else if (action.equals("i")){
-            context.setState(new InsertionMenuState(context));
+            return new InsertionMenuState(contextSavedCoords, crossword);
         }
         else
             System.err.println("Dang la comparison non funziona");
+        return new MainMenuState(contextSavedCoords, crossword);
     }
 }

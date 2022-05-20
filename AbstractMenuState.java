@@ -2,7 +2,8 @@ import java.util.List;
 
 public abstract class AbstractMenuState implements MenuState{
     protected Integer numberOfLinesWritten = 0;
-    protected MenuContext context;
+    protected Coords contextSavedCoords;
+    protected Crossword crossword;
     public String getValidInput(String prompt, List<String> options, String def){
         System.out.print(prompt);
         while (true){                

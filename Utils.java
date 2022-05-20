@@ -98,4 +98,11 @@ public class Utils {
             return false;  
           }
     }
+
+    public static void printInputError(String error){
+        System.out.println(error + ", riprovare");
+        System.out.println("Press Enter to continue...");
+        Utils.sc.nextLine();
+        TerminalCursor.clearLines(3);
+    }
 }
