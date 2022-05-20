@@ -88,10 +88,6 @@ public class Crossword extends Subject{
         for (Number n : physicalComposition.getNumbers()) {
             insertNumber(n);
         }
-        // for (Coords b : physicalComposition.getBlacks()) {
-        //     insertBlack(b);
-        // }
-        //uncomment when Frontend is working
         setChanged();
         notify_observers();
 
@@ -131,16 +127,6 @@ public class Crossword extends Subject{
         TerminalCursor.cursorRight(1 + n.getX_cord()*4);
         System.out.print(Utils.convertNumberToSubscript(Integer.toString(n.getNumber())));
         TerminalCursor.cursorDown((height - n.getY_cord())*2 +1);
-        System.out.print('\r');
-    }
-
-    private void insertBlack(Coords c){
-        int height = physicalComposition.getSize().getHeight();
-        TerminalCursor.cursorUp(height * 2 +1);
-        TerminalCursor.cursorDown(c.getY_cord() * 2 + 1) ;
-        TerminalCursor.cursorRight(1 + c.getX_cord()*4);
-        System.out.print("▐█▌");
-        TerminalCursor.cursorDown((height - c.getY_cord())*2);
         System.out.print('\r');
     }
 }
