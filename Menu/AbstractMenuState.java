@@ -1,5 +1,7 @@
 import java.util.List;
 
+import YamlStructure.Coords;
+
 public abstract class AbstractMenuState implements MenuState{
     protected Integer numberOfLinesWritten = 0;
     protected Coords contextSavedCoords;

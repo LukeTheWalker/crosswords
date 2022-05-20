@@ -10,6 +10,10 @@ import java.util.Scanner; // Import the Scanner class to read text files
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
+import YamlStructure.Coords;
+import YamlStructure.PhysicalComposition;
+
+
 public class Utils {
     public static Scanner sc = new Scanner(System.in); 
     public static List<String> getSuggestions (String filename){

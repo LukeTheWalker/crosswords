@@ -1,3 +1,4 @@
+package YamlStructure;
 import java.util.List;
 
 public class PhysicalComposition {

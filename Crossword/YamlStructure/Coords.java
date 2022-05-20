@@ -1,9 +1,10 @@
+package YamlStructure;
 public class Coords {
     private Integer x_cord;
     private Integer y_cord;
 
     Coords () {};
-    Coords(Integer x_cord, Integer y_cord) {
+    public Coords(Integer x_cord, Integer y_cord) {
         this.x_cord = x_cord;
         this.y_cord = y_cord;
     }

@@ -1,3 +1,4 @@
+package YamlStructure;
 public class Size {
     private Integer width;
     private Integer height;

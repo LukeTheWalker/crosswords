@@ -1,3 +1,5 @@
+import YamlStructure.Coords;
+
 public class SuggestionMenuState extends AbstractMenuState{
     public SuggestionMenuState(Coords contextSavedCoords, Crossword crossword) {
         this.contextSavedCoords = contextSavedCoords;
@@ -19,7 +21,7 @@ public class SuggestionMenuState extends AbstractMenuState{
         TerminalCursor.clearLines(2);
             
         Suggestion suggestion = crossword.getSuggestion(stringNumber);
-        Number number = suggestion.getNumber();
+        YamlStructure.Number number = suggestion.getNumber();
 
         contextSavedCoords = new Coords(number.getX_cord(), number.getY_cord());
         suggestion.printSuggestion();
