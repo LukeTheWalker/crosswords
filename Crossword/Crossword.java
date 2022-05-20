@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import YamlStructure.Coords;
+import YamlStructure.Number;
+import YamlStructure.PhysicalComposition;
+
+
 public class Crossword extends Subject{
     private List<String> orizzontali = new ArrayList<>();
     private List<String> verticali = new ArrayList<>();

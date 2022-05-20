@@ -1,5 +1,7 @@
 import java.util.List;
 
+import YamlStructure.Coords;
+
 public class MainMenuState extends AbstractMenuState{
     public MainMenuState(Coords contextSavedCoords, Crossword crossword) {
         this.contextSavedCoords = contextSavedCoords;

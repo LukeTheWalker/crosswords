@@ -1,3 +1,4 @@
+package YamlStructure;
 public class Number {
     private Integer x_cord;
     private Integer y_cord;

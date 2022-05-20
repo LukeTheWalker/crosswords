@@ -2,5 +2,13 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "Packages/snakeyaml-1.30.jar"
+    ],
+    "java.project.sourcePaths": [
+        ".",
+        "Crossword",
+        "Data",
+        "Menu",
+        "Packages",
+        "Utility"
     ]
 }

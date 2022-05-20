@@ -1,5 +1,7 @@
 import java.io.FileNotFoundException;
 
+import YamlStructure.Coords;
+
 public class MenuContext {
     private MenuState state;
     private Crossword c;

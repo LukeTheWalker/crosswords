@@ -1,3 +1,6 @@
+
+import YamlStructure.PhysicalComposition;
+
 public class Frontend implements Observer {
 
     private void showGrid(String[][] grid, PhysicalComposition physicalComposition){

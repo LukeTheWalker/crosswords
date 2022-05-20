@@ -1,3 +1,5 @@
+import YamlStructure.PhysicalComposition;
+
 public class ObserverData{
     private PhysicalComposition physicalComposition;
     private String[][] grid;

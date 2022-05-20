@@ -1,3 +1,5 @@
+import YamlStructure.Number;
+
 public class Suggestion {
     private String verticalSuggestion;
     private String horizontalSuggestion;
@@ -16,8 +18,8 @@ public class Suggestion {
         return number;
     }
 
-    public void setNumber(Number number) {
-        this.number = number;
+    public void setNumber(YamlStructure.Number number2) {
+        this.number = number2;
     }
 
     public void setHorizontalSuggestion(String horizontalSuggestion) {
