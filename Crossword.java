@@ -39,7 +39,7 @@ public class Crossword extends Subject{
         int height = this.physicalComposition.getSize().getHeight();
         if((coords.getX_cord() >=  width) || (coords.getY_cord() >=  height)) return false;
 
-        return !grid[coords.getX_cord()][coords.getY_cord()].equals("█");
+        return !grid[coords.getX_cord()][coords.getY_cord()].equals("▐█▌");
     }
 
     private void insertLetter(Coords coord, char c){
@@ -83,14 +83,18 @@ public class Crossword extends Subject{
     }
 
     public void setupGrid(){
-        //TerminalCursor.clearTerminal();
+        TerminalCursor.clearTerminal();
         printStandardGrid();
         for (Number n : physicalComposition.getNumbers()) {
             insertNumber(n);
         }
-        for (Coords b : physicalComposition.getBlacks()) {
-            insertBlack(b);
-        }
+        // for (Coords b : physicalComposition.getBlacks()) {
+        //     insertBlack(b);
+        // }
+        //uncomment when Frontend is working
+        setChanged();
+        notify_observers();
+
     }
 
     private void printStandardGrid(){
@@ -120,27 +124,12 @@ public class Crossword extends Subject{
         System.out.println("───┘");
     }
 
-    private String convertNumberToSubscript(String numberString) {
-        numberString = numberString.replaceAll("0", "₀");
-        numberString = numberString.replaceAll("1", "₁");
-        numberString = numberString.replaceAll("2", "₂");
-        numberString = numberString.replaceAll("3", "₃");
-        numberString = numberString.replaceAll("4", "₄");
-        numberString = numberString.replaceAll("5", "₅");
-        numberString = numberString.replaceAll("6", "₆");
-        numberString = numberString.replaceAll("7", "₇");
-        numberString = numberString.replaceAll("8", "₈");
-        numberString = numberString.replaceAll("9", "₉");         
-        return numberString;
-    }
-
-
     private void insertNumber(Number n){
         int height = physicalComposition.getSize().getHeight();
         TerminalCursor.cursorUp(height * 2 +1);
         TerminalCursor.cursorDown(n.getY_cord() * 2) ;
         TerminalCursor.cursorRight(1 + n.getX_cord()*4);
-        System.out.print(convertNumberToSubscript(Integer.toString(n.getNumber())));
+        System.out.print(Utils.convertNumberToSubscript(Integer.toString(n.getNumber())));
         TerminalCursor.cursorDown((height - n.getY_cord())*2 +1);
         System.out.print('\r');
     }
@@ -150,8 +139,8 @@ public class Crossword extends Subject{
         TerminalCursor.cursorUp(height * 2 +1);
         TerminalCursor.cursorDown(c.getY_cord() * 2 + 1) ;
         TerminalCursor.cursorRight(1 + c.getX_cord()*4);
-        System.out.print("███");
-        TerminalCursor.cursorDown((height - c.getY_cord())*2 +1);
+        System.out.print("▐█▌");
+        TerminalCursor.cursorDown((height - c.getY_cord())*2);
         System.out.print('\r');
     }
 }

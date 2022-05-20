@@ -13,10 +13,10 @@ public class MenuContext {
 
     public void start() {
         c.setupGrid();
-        // while (true){
-        //     String action = state.printMenuOptions();
-        //     setState(state.handle(action));
-        // }
+        while (true){
+            String action = state.printMenuOptions();
+            setState(state.handle(action));
+        }
 
     }
 

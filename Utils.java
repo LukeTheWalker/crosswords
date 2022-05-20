@@ -29,6 +29,20 @@ public class Utils {
         return res;
     }
 
+    public static String convertNumberToSubscript(String numberString) {
+        numberString = numberString.replaceAll("0", "₀");
+        numberString = numberString.replaceAll("1", "₁");
+        numberString = numberString.replaceAll("2", "₂");
+        numberString = numberString.replaceAll("3", "₃");
+        numberString = numberString.replaceAll("4", "₄");
+        numberString = numberString.replaceAll("5", "₅");
+        numberString = numberString.replaceAll("6", "₆");
+        numberString = numberString.replaceAll("7", "₇");
+        numberString = numberString.replaceAll("8", "₈");
+        numberString = numberString.replaceAll("9", "₉");         
+        return numberString;
+    }
+
     public static PhysicalComposition getPhysicalComposition (String filename) throws FileNotFoundException{
         InputStream inputStream = new FileInputStream(filename);
         Yaml yaml = new Yaml(new Constructor(PhysicalComposition.class));
@@ -42,7 +56,7 @@ public class Utils {
             for (int j = 0; j < physicalComposition.getSize().getHeight(); j++)
                 grid[i][j] = " ";
         for (Coords black: physicalComposition.getBlacks())
-            grid[black.getX_cord()][black.getY_cord()] = "█";
+            grid[black.getX_cord()][black.getY_cord()] = "▐█▌";
 
         // for (Number number: physicalComposition.getNumbers())
         // for (int i = 1; i < physicalComposition.getNumbers().size(); i++){
