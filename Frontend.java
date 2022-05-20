@@ -12,7 +12,7 @@ public class Frontend implements Observer {
         int height = physicalComposition.getSize().getHeight();
         TerminalCursor.cursorUp(height * 2 + 1);
         TerminalCursor.cursorDown(y * 2 + 1) ;
-        TerminalCursor.cursorRight(1 + x*4);
+        TerminalCursor.cursorRight(1 + x * 4);
         if(s.equals("black")) System.out.print("▐█▌");
         else System.out.print(" " + s);
         TerminalCursor.cursorDown((height - y) * 2);
