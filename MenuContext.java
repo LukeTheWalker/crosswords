@@ -12,10 +12,12 @@ public class MenuContext {
     }
 
     public void start() {
-        while (true){
-            String action = state.printMenuOptions();
-            setState(state.handle(action));
-        }
+        c.setupGrid();
+        // while (true){
+        //     String action = state.printMenuOptions();
+        //     setState(state.handle(action));
+        // }
+
     }
 
     public Crossword getCrossword() {

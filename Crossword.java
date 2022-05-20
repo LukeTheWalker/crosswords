@@ -81,4 +81,77 @@ public class Crossword extends Subject{
     public PhysicalComposition getPhysicalComposition(){
         return this.physicalComposition;
     }
+
+    public void setupGrid(){
+        //TerminalCursor.clearTerminal();
+        printStandardGrid();
+        for (Number n : physicalComposition.getNumbers()) {
+            insertNumber(n);
+        }
+        for (Coords b : physicalComposition.getBlacks()) {
+            insertBlack(b);
+        }
+    }
+
+    private void printStandardGrid(){
+        int width = physicalComposition.getSize().getWidth();
+        int height = physicalComposition.getSize().getHeight();
+        System.out.print("┌");
+        for (int i = 0; i < width - 1; i++)
+            System.out.print("───┬");
+        System.out.println("───┐");
+        System.out.print("│");
+        for (int i = 0; i < width; i++)
+            System.out.print("   │");
+        System.out.println();
+        for (int k = 0; k < height - 1; k++) {
+            System.out.print("├");
+            for (int i = 0; i < width - 1; i++)
+                System.out.print("───┼");
+            System.out.println("───┤");
+            System.out.print("│");
+            for (int i = 0; i < width; i++)
+                System.out.print("   │");
+            System.out.println();
+        }
+        System.out.print("└");
+        for (int i = 0; i < width - 1; i++)
+            System.out.print("───┴");
+        System.out.println("───┘");
+    }
+
+    private String convertNumberToSubscript(String numberString) {
+        numberString = numberString.replaceAll("0", "₀");
+        numberString = numberString.replaceAll("1", "₁");
+        numberString = numberString.replaceAll("2", "₂");
+        numberString = numberString.replaceAll("3", "₃");
+        numberString = numberString.replaceAll("4", "₄");
+        numberString = numberString.replaceAll("5", "₅");
+        numberString = numberString.replaceAll("6", "₆");
+        numberString = numberString.replaceAll("7", "₇");
+        numberString = numberString.replaceAll("8", "₈");
+        numberString = numberString.replaceAll("9", "₉");         
+        return numberString;
+    }
+
+
+    private void insertNumber(Number n){
+        int height = physicalComposition.getSize().getHeight();
+        TerminalCursor.cursorUp(height * 2 +1);
+        TerminalCursor.cursorDown(n.getY_cord() * 2) ;
+        TerminalCursor.cursorRight(1 + n.getX_cord()*4);
+        System.out.print(convertNumberToSubscript(Integer.toString(n.getNumber())));
+        TerminalCursor.cursorDown((height - n.getY_cord())*2 +1);
+        System.out.print('\r');
+    }
+
+    private void insertBlack(Coords c){
+        int height = physicalComposition.getSize().getHeight();
+        TerminalCursor.cursorUp(height * 2 +1);
+        TerminalCursor.cursorDown(c.getY_cord() * 2 + 1) ;
+        TerminalCursor.cursorRight(1 + c.getX_cord()*4);
+        System.out.print("███");
+        TerminalCursor.cursorDown((height - c.getY_cord())*2 +1);
+        System.out.print('\r');
+    }
 }

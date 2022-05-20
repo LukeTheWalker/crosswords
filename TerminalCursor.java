@@ -15,7 +15,32 @@ public class TerminalCursor {
     }
 
     public static void cursorUp(Integer n){
+        if(n == 0) return;
         System.out.print("\r");
-        System.out.print(ESC + Integer.toString(n) + "A");
+        System.out.print(ESC + n + "A");
     }
+
+    public static void cursorDown(Integer n){
+        if(n == 0) return;
+        System.out.print("\r");
+        System.out.print(ESC + n + "B");
+    }
+
+    public static void cursorRight(Integer n){
+        if(n == 0) return;
+        System.out.print("\r");
+        System.out.print(ESC + n + "C");
+    }
+    public static void saveCursor(){
+        System.out.print("\r");
+        System.out.print(ESC + "s");
+    }
+    public static void restoreCursor(){
+        System.out.print("\r");
+        System.out.print(ESC + "u");
+    }
+    public static void clearTerminal(){
+        System.out.print(ESC + "H" + ESC + "2J");
+    }
+
 }
