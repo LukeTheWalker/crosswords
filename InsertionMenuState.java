@@ -1,106 +1,129 @@
-public class InsertionMenuState implements MenuState{
-    private MenuContext context;
+import java.util.List;
+
+public class InsertionMenuState extends AbstractMenuState{
     public InsertionMenuState(MenuContext context) {
         this.context = context;
     }
 
-    // public String printMenuOptions(){
-    //     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-    //     System.out.println("Inserisci i dati richiesti per procedere all'inserimento");
-    //     Boolean saved_coords_found = false;
-    //     Character answer = '\0';
-    //     Character typeOfWord = 'v';
-    //     String word = "";
-        
-    //     if (context.getSavedCoords().getX_cord() != null){
-    //         System.out.print("Sono state trovate delle coordinate precedentemente salvate " + context.getSavedCoords().toString() + ", si desidera utilizzarle? [y/n]: ");
-    //         try { answer = (char) br.read(); } catch (IOException e) { e.printStackTrace(); }
-    //         if (Character.toLowerCase(answer) == 'y')
-    //             saved_coords_found = true;
-    //     }
-    //     else 
-    //         System.out.println("Non sono state trovate coordinate salvate");
-
-    //     System.out.print("Inserisci coordinata x: ");
-    //     if (saved_coords_found)
-    //         System.out.println(context.getSavedCoords().getX_cord());
-    //     else 
-    //         try { String response = br.readLine(); context.getSavedCoords().setX_cord(Integer.parseInt(response)); } catch (IOException e) { e.printStackTrace(); }
-
-    //     System.out.print("Inserisci coordinata y: ");
-    //     if (saved_coords_found)
-    //         System.out.println(context.getSavedCoords().getY_cord());
-    //     else 
-    //         try { String response = br.readLine(); context.getSavedCoords().setY_cord(Integer.parseInt(response)); } catch (IOException e) { e.printStackTrace(); }
-
-    //     System.out.print("Vuoi inserire una parola Verticale o Orizzontale? [v/o]: ");
-
-    //     try { Character response = (char) br.read(); br.skip(1); typeOfWord = Character.toLowerCase(response); } catch (IOException e) { e.printStackTrace(); }
-
-    //     System.out.print("Inserisci la parola la scrivere: ");
-
-    
-    //     try { br.skip(1); word = br.readLine(); } catch (IOException e) { e.printStackTrace(); }
-
-    //     System.out.println(saved_coords_found.toString() + ":" + typeOfWord + ":" + word);
-    //     //TerminalCursor.clearLines(4);
-
-    //     return context.getSavedCoords().toString() + ":" + typeOfWord + ":" + word;
-    // }
-
-
-    public String printMenuOptions(){
-
-        System.out.println("Inserisci i dati richiesti per procedere all'inserimento");
-        Boolean saved_coords_found = false;
-        String typeOfWord;
-        String word, answer;
-        
-        if (context.getSavedCoords().getX_cord() != -1){
-            System.out.print("Sono state trovate delle coordinate precedentemente salvate " + context.getSavedCoords().toString() + ", si desidera utilizzarle? [y/n]: ");
-            answer = Utils.sc.nextLine().toLowerCase().strip();
-            if (answer.toLowerCase().equals("y"))
-                saved_coords_found = true;
+    private Boolean handleSavedCoords(){      
+        numberOfLinesWritten++; 
+        if (context.getSavedCoords().getX_cord() != -1){    
+            while (true){                
+                System.out.print("Sono state trovate delle coordinate precedentemente salvate " + context.getSavedCoords().toString() + ", si desidera utilizzarle? [Y/n]: ");
+                String answer = Utils.sc.nextLine().toLowerCase().strip();
+                if (answer.equals("y") || answer.equals("")) 
+                    return true;
+                else if (answer.equals("n"))
+                    return false;
+                TerminalCursor.clearLines(1);
+            }
         }
-        else 
+        else
             System.out.println("Non sono state trovate coordinate salvate");
+        return false;
+    } 
 
+    private Integer getXCoordinate(Boolean saved_coords_found){
         System.out.print("Inserisci coordinata x: ");
         if (saved_coords_found)
             System.out.println(context.getSavedCoords().getX_cord());
         else 
-            { String response = Utils.sc.nextLine(); context.getSavedCoords().setX_cord(Integer.parseInt(response)); }
+            while (true) {
+                String response = Utils.sc.nextLine().strip(); 
+                if (Utils.isNumber(response))
+                    return Integer.parseInt(response);
+                TerminalCursor.clearLines(1);
+                System.out.print("Inserisci coordinata x: ");
+            }
+        return context.getSavedCoords().getX_cord();
+    }
 
+    private Integer getYCoordinate(Boolean saved_coords_found){
         System.out.print("Inserisci coordinata y: ");
         if (saved_coords_found)
             System.out.println(context.getSavedCoords().getY_cord());
         else 
-            { String response = Utils.sc.nextLine(); context.getSavedCoords().setY_cord(Integer.parseInt(response)); }
+            while (true) {
+                String response = Utils.sc.nextLine().strip(); 
+                if (Utils.isNumber(response))
+                    return Integer.parseInt(response);
+                TerminalCursor.clearLines(1);
+                System.out.print("Inserisci coordinata y: ");
+            }
+        return context.getSavedCoords().getY_cord();
+    }
 
-        System.out.print("Vuoi inserire una parola Verticale o Orizzontale? [v/o]: ");
+    private Coords getNewCoords(Boolean saved_coords_found){
+        Integer new_x, new_y;
+        numberOfLinesWritten += 2;
+        while (true){
+            new_x = getXCoordinate(saved_coords_found);
+            new_y = getYCoordinate(saved_coords_found);
+            Coords newCoords = new Coords(new_x, new_y);
+            if (context.validateCoords(newCoords))
+                return newCoords;
+            System.out.println("Coordinate inserite non valide, riprovare");
+            System.out.println("Press Enter to continue...");
+            Utils.sc.nextLine();
+            TerminalCursor.clearLines(5);
+        }
 
-        String response = Utils.sc.nextLine();
-        typeOfWord = response.toLowerCase();
+    }
 
-        System.out.print("Inserisci la parola la scrivere: ");
+    private Boolean askForSuggestion(){
+        numberOfLinesWritten++;
+        String wantSuggestion = getValidInput("Vorresti leggere una suggestion? [Y/n]: ", List.of("y", "n"), "y");
+        return wantSuggestion.equals("y");
+    }
 
-        word = Utils.sc.nextLine();
+    public String printMenuOptions(){
+        numberOfLinesWritten++;
+        System.out.println("Inserisci i dati richiesti per procedere all'inserimento");
+        Boolean saved_coords_found = false;
+        String typeOfWord;
+        String word;
+        
+        saved_coords_found = handleSavedCoords();
+
+        if (!saved_coords_found && askForSuggestion()){
+            TerminalCursor.clearLines(3);
+            return "s";
+        }
+
+        context.setSavedCoords(getNewCoords(saved_coords_found));
+
+        // Integer new_x = getXCoordinate(saved_coords_found);
+        // context.getSavedCoords().setX_cord(new_x); 
+
+        // Integer new_y = getYCoordinate(saved_coords_found);
+        // context.getSavedCoords().setY_cord(new_y); 
+
+        numberOfLinesWritten++;
+        typeOfWord = getValidInput("Vuoi inserire una parola Verticale o Orizzontale? [V/o]: ", List.of("v", "o"), "v");
+
+        numberOfLinesWritten++;
+        System.out.print("Inserisci la parola da scrivere: ");
+        word = Utils.sc.nextLine().strip();
 
         //System.out.println(context.getSavedCoords().toString() + ":" + typeOfWord + ":" + word);
 
-        TerminalCursor.clearLines(6);
+        TerminalCursor.clearLines(numberOfLinesWritten);
 
         return context.getSavedCoords().toString() + ":" + typeOfWord + ":" + word;
     }
-    public void handle(String action){
-        String[] arguments = action.split(":");
-        int x_cord = Integer.parseInt(arguments[0].split(" ")[0]);
-        int y_cord = Integer.parseInt(arguments[0].split(" ")[1]);
-        String direction = arguments[1];
-        String word = arguments[2];
-        Coords coords = new Coords(x_cord, y_cord);
-        context.getCrossword().updateGrid(coords, direction, word);
-        context.setState(new MainMenuState(context));
+    public void handle(String insertion){
+        if (insertion.equals("s")){
+            context.setState(new SuggestionMenuState(context));
+        }
+        else {
+            String[] arguments = insertion.split(":");
+            int x_cord = Integer.parseInt(arguments[0].split(" ")[0]);
+            int y_cord = Integer.parseInt(arguments[0].split(" ")[1]);
+            String direction = arguments[1];
+            String word = arguments[2];
+            Coords coords = new Coords(x_cord, y_cord);
+            context.getCrossword().updateGrid(coords, direction, word);
+            context.setState(new MainMenuState(context));
+        }
     }
 }

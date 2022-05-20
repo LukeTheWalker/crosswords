@@ -1,19 +1,21 @@
-public class MainMenuState implements MenuState{
-    private MenuContext context;
+import java.util.List;
+
+public class MainMenuState extends AbstractMenuState{
     public MainMenuState(MenuContext context) {
         this.context = context;
     }
 
     public String printMenuOptions(){
 
-        System.out.println("Scegli azione");
-        System.out.println("Leggi definizione [S/s]");
-        System.out.println("Inserisci parola [I/i]");
-        
-        String action = new String();
-        action = Utils.sc.nextLine().toLowerCase().strip(); 
+        numberOfLinesWritten += 4;
 
-        TerminalCursor.clearLines(4);
+        System.out.println("Scegli azione");
+        System.out.println("Leggi definizione [s]");
+        System.out.println("Inserisci parola  [i]");
+        
+        String action = getValidInput("action [S/i]: ", List.of("s", "i"), "s");
+        
+        TerminalCursor.clearLines(numberOfLinesWritten);
 
         return action;
     }
