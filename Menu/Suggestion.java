@@ -38,14 +38,15 @@ public class Suggestion {
         TerminalCursor.cursorRight(rightOffset);
         TerminalCursor.eraseUntilEndOfLine();
 
-        System.out.print("Vertical suggestion: ");
-        System.out.print(verticalSuggestion != null ? verticalSuggestion : "N/A" );
+        System.out.print("Horizontal suggestion: ");
+        System.out.print(horizontalSuggestion != null ? horizontalSuggestion : "N/A" );
 
         TerminalCursor.cursorDown(1);
         TerminalCursor.cursorRight(rightOffset);
         TerminalCursor.eraseUntilEndOfLine();
         
-        System.out.print("Horizontal suggestion: ");
-        System.out.print(horizontalSuggestion != null ? horizontalSuggestion : "N/A" );
+        System.out.print("Vertical suggestion: ");
+        System.out.print(verticalSuggestion != null ? verticalSuggestion : "N/A" );
+
     }
 }

@@ -81,7 +81,7 @@ public class InsertionMenuState extends AbstractMenuState{
         while (true){
             System.out.print("Inserisci la parola da scrivere [" + wordCoords.size() + "]: ");
             String word = Utils.sc.nextLine().strip();
-            if (word.length() == wordCoords.size())
+            if ((word.length() == wordCoords.size()) || word.equals("BACK"))
                 return word;
             Utils.printInputError("La parola inserita non è della lunghezza corretta");
             TerminalCursor.clearLines(1);
@@ -102,7 +102,11 @@ public class InsertionMenuState extends AbstractMenuState{
         contextSavedCoords = getNewCoords(saved_coords_found);
 
         numberOfLinesWritten++;
-        String direction = getValidInput("Vuoi inserire una parola Verticale o Orizzontale? [V/o]: ", List.of("v", "o"), "v");
+        String direction = getValidInput("Vuoi inserire una parola Orizzontale o Verticale? [O/v/q]: ", List.of("o", "v", "q"), "o");
+        if (direction.equals("q")){
+            TerminalCursor.clearLines(numberOfLinesWritten);
+            return "q";
+        }
 
         List<Coords> wordCoords = crossword.getWordCoords(contextSavedCoords, direction);
 
@@ -112,7 +116,8 @@ public class InsertionMenuState extends AbstractMenuState{
 
         TerminalCursor.clearLines(numberOfLinesWritten);
 
-        crossword.updateGrid(wordCoords, word);
+        if (!word.equals("BACK"))
+            crossword.updateGrid(wordCoords, word);
 
         return contextSavedCoords.toString() + ":" + direction + ":" + word;
     }
