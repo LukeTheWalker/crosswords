@@ -39,7 +39,7 @@ public class Crossword extends Subject{
         int height = this.physicalComposition.getSize().getHeight();
         if((coords.getX_cord() >=  width) || (coords.getY_cord() >=  height)) return false;
 
-        return !grid[coords.getX_cord()][coords.getY_cord()].equals("▐█▌");
+        return !grid[coords.getX_cord()][coords.getY_cord()].equals("black");
     }
 
     private void insertLetter(Coords coord, char c){
@@ -86,7 +86,8 @@ public class Crossword extends Subject{
         TerminalCursor.clearTerminal();
         printStandardGrid();
         for (Number n : physicalComposition.getNumbers()) {
-            insertNumber(n);
+            if(n.getNumber() != 0)
+                insertNumber(n);
         }
         setChanged();
         notify_observers();

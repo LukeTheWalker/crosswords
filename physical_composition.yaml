@@ -88,6 +88,10 @@ blacks:
         y_cord: 6
 
 numbers:
+    -   number: 0
+        x_cord: -1
+        y_cord: -1
+
     -   number: 1
         x_cord: 0
         y_cord: 0

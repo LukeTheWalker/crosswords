@@ -56,7 +56,7 @@ public class Utils {
             for (int j = 0; j < physicalComposition.getSize().getHeight(); j++)
                 grid[i][j] = " ";
         for (Coords black: physicalComposition.getBlacks())
-            grid[black.getX_cord()][black.getY_cord()] = "▐█▌";
+            grid[black.getX_cord()][black.getY_cord()] = "black";
 
         // for (Number number: physicalComposition.getNumbers())
         // for (int i = 1; i < physicalComposition.getNumbers().size(); i++){
