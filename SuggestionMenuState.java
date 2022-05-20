@@ -16,13 +16,18 @@ public class SuggestionMenuState extends AbstractMenuState{
     }
 
     private void printSuggestion(String stringNumber){
-        TerminalCursor.clearLines(2);
+        Integer width = crossword.getPhysicalComposition().getSize().getWidth();
+        Integer height = crossword.getPhysicalComposition().getSize().getHeight();
+
+        Integer linesJumped = TerminalCursor.goToSuggestion(height);
             
         Suggestion suggestion = crossword.getSuggestion(stringNumber);
         Number number = suggestion.getNumber();
 
         contextSavedCoords = new Coords(number.getX_cord(), number.getY_cord());
-        suggestion.printSuggestion();
+        suggestion.printSuggestion(width * 5);
+
+        TerminalCursor.cursorDown(linesJumped);
     }
 
     public String printMenuOptions(){
