@@ -28,4 +28,8 @@ public class Coords {
         return Integer.toString(x_cord) + " " + Integer.toString(y_cord);
     }
 
+    public Coords getNextCoords(String direction){
+        int isOrizzontale = direction.equals("o") ? 1 : 0;
+        return new Coords(x_cord + isOrizzontale, y_cord + (1 - isOrizzontale));
+    }
 }

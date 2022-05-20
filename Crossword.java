@@ -1,8 +1,8 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Crossword extends Subject{
     private List<String> orizzontali = new ArrayList<>();
@@ -34,10 +34,6 @@ public class Crossword extends Subject{
         return suggestion; 
     }
 
-    private void insertLetter(Coords coord, char c){
-        grid[coord.getX_cord()][coord.getY_cord()] = String.valueOf(c);
-    }
-
     private Boolean checkInsertion(Coords coords){
         int width = this.physicalComposition.getSize().getWidth();
         int height = this.physicalComposition.getSize().getHeight();
@@ -46,30 +42,38 @@ public class Crossword extends Subject{
         return !grid[coords.getX_cord()][coords.getY_cord()].equals("█");
     }
 
-    private Boolean insertWord(Coords coords, String direction, String word){
-        int x = coords.getX_cord();
-        int y = coords.getY_cord();
-        int isOrizzontale = direction.equals("o") ? 1 : 0;
-        Boolean isValid = IntStream.range(0, word.length())
-                                    .mapToObj(i -> new Coords(x + i * isOrizzontale, y + i * (1 - isOrizzontale) ))
-                                    .allMatch(newLetterCoords -> (checkInsertion(newLetterCoords)));
-
-        if (isValid)
-            for (int i = 0; i < word.length(); i++)
-                insertLetter(new Coords(x + i * isOrizzontale, y + i * (1 - isOrizzontale)), word.charAt(i));
-
-        return isValid;
+    private void insertLetter(Coords coord, char c){
+        grid[coord.getX_cord()][coord.getY_cord()] = String.valueOf(c);
     }
 
-    public void updateGrid(Coords coords, String direction, String word){
-        if(!insertWord(coords, direction, word)){
-            System.out.println("error inserting word");
-        }else{
-            setChanged();
-            notify_observers();
-        }
+    private void insertWord(List<Coords> coords, String word){
+        for (int i = 0; i < word.length(); i++)
+            insertLetter(coords.get(i), word.charAt(i));
     }
 
+    public void updateGrid(List<Coords> coords, String word){
+        insertWord(coords, word);
+        setChanged();
+        notify_observers();
+    }
+
+    public List<Coords> getWordCoords (Coords startingCoords, String direction){
+        return Stream
+            .iterate(startingCoords, nextCoords -> nextCoords.getNextCoords(direction))
+            .takeWhile(this::checkInsertion)
+            .collect(Collectors.toList());
+    }
+
+    public Boolean validateNumber(int n){
+        return getPhysicalComposition().getNumbers().stream().anyMatch(num -> num.getNumber() >= n);
+    }
+
+    public Boolean validateCoords(Coords coords){
+        return coords.getX_cord() < getPhysicalComposition().getSize().getWidth()  &&
+               coords.getY_cord() < getPhysicalComposition().getSize().getHeight() &&
+               coords.getX_cord() >= 0 &&
+               coords.getY_cord() >= 0;
+    }
     public void notify_observers() {
         super.notify(new ObserverData(physicalComposition, grid));
     }
