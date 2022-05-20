@@ -39,7 +39,7 @@ public class Crossword extends Subject{
         int height = this.physicalComposition.getSize().getHeight();
         if((coords.getX_cord() >=  width) || (coords.getY_cord() >=  height)) return false;
 
-        return !grid[coords.getX_cord()][coords.getY_cord()].equals("█");
+        return !grid[coords.getX_cord()][coords.getY_cord()].equals("black");
     }
 
     private void insertLetter(Coords coord, char c){
@@ -80,5 +80,54 @@ public class Crossword extends Subject{
 
     public PhysicalComposition getPhysicalComposition(){
         return this.physicalComposition;
+    }
+
+    public void setupGrid(){
+        TerminalCursor.clearTerminal();
+        printStandardGrid();
+        for (Number n : physicalComposition.getNumbers()) {
+            if(n.getNumber() != 0)
+                insertNumber(n);
+        }
+        setChanged();
+        notify_observers();
+
+    }
+
+    private void printStandardGrid(){
+        int width = physicalComposition.getSize().getWidth();
+        int height = physicalComposition.getSize().getHeight();
+        System.out.print("┌");
+        for (int i = 0; i < width - 1; i++)
+            System.out.print("───┬");
+        System.out.println("───┐");
+        System.out.print("│");
+        for (int i = 0; i < width; i++)
+            System.out.print("   │");
+        System.out.println();
+        for (int k = 0; k < height - 1; k++) {
+            System.out.print("├");
+            for (int i = 0; i < width - 1; i++)
+                System.out.print("───┼");
+            System.out.println("───┤");
+            System.out.print("│");
+            for (int i = 0; i < width; i++)
+                System.out.print("   │");
+            System.out.println();
+        }
+        System.out.print("└");
+        for (int i = 0; i < width - 1; i++)
+            System.out.print("───┴");
+        System.out.println("───┘");
+    }
+
+    private void insertNumber(Number n){
+        int height = physicalComposition.getSize().getHeight();
+        TerminalCursor.cursorUp(height * 2 +1);
+        TerminalCursor.cursorDown(n.getY_cord() * 2) ;
+        TerminalCursor.cursorRight(1 + n.getX_cord()*4);
+        System.out.print(Utils.convertNumberToSubscript(Integer.toString(n.getNumber())));
+        TerminalCursor.cursorDown((height - n.getY_cord())*2 +1);
+        System.out.print('\r');
     }
 }
