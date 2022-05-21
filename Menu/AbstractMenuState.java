@@ -1,10 +1,8 @@
 import java.util.List;
 
-import YamlStructure.Coords;
-
 public abstract class AbstractMenuState implements MenuState{
     protected Integer numberOfLinesWritten = 0;
-    protected Coords contextSavedCoords;
+    protected Suggestion contextSavedSuggestion;
     protected Crossword crossword;
     public String getValidInput(String prompt, List<String> options, String def){
         System.out.print(prompt);

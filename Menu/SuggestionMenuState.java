@@ -1,8 +1,6 @@
-import YamlStructure.Coords;
-
 public class SuggestionMenuState extends AbstractMenuState{
-    public SuggestionMenuState(Coords contextSavedCoords, Crossword crossword) {
-        this.contextSavedCoords = contextSavedCoords;
+    public SuggestionMenuState(Suggestion contextSavedSuggestion, Crossword crossword) {
+        this.contextSavedSuggestion = contextSavedSuggestion;
         this.crossword = crossword;
     }
 
@@ -23,11 +21,9 @@ public class SuggestionMenuState extends AbstractMenuState{
 
         Integer linesJumped = TerminalCursor.goToSuggestion(height);
             
-        Suggestion suggestion = crossword.getSuggestion(stringNumber);
-        YamlStructure.Number number = suggestion.getNumber();
+        contextSavedSuggestion = crossword.getSuggestion(stringNumber);
 
-        contextSavedCoords = new Coords(number.getX_cord(), number.getY_cord());
-        suggestion.printSuggestion(width * 5);
+        contextSavedSuggestion.printSuggestion(width * 5);
 
         TerminalCursor.cursorDown(linesJumped);
     }
@@ -50,6 +46,6 @@ public class SuggestionMenuState extends AbstractMenuState{
     }
 
     public MenuState handle(String action){
-        return new InsertionMenuState(contextSavedCoords, crossword);
+        return new InsertionMenuState(contextSavedSuggestion, crossword);
     }
 }
