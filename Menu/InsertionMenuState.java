@@ -16,18 +16,18 @@ public class InsertionMenuState extends AbstractMenuState{
 
     public String getValidDirection(){
         numberOfLinesWritten++;
-        System.out.print("Vuoi inserire una parola Orizzontale o Verticale? [O/v/q]: ");
+        String prompt = "Vuoi inserire una parola Orizzontale o Verticale? [O/v/q]: ";
         String direction;
         if (contextSavedSuggestion.getHorizontalSuggestion() == null){
             direction = "v";
-            System.out.println("v");
+            System.out.println(prompt + "v");
         }
         else if (contextSavedSuggestion.getVerticalSuggestion() == null){
             direction = "o";
-            System.out.println("o");
+            System.out.println(prompt + "o");
         }
         else 
-            direction = getValidInput("", List.of("o", "v", "q"), "o");
+            direction = getValidInput(prompt, List.of("o", "v", "q"), "o");
         return direction;
     }
 
