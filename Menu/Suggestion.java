@@ -34,11 +34,19 @@ public class Suggestion {
         this.verticalSuggestion = verticalSuggestion;
     }
 
-    public void printSuggestion(){
-        System.out.print("Vertical suggestion: ");
-        System.out.println(verticalSuggestion != null ? verticalSuggestion : "N/A" );
-       
+    public void printSuggestion(Integer rightOffset){
+        TerminalCursor.cursorRight(rightOffset);
+        TerminalCursor.eraseUntilEndOfLine();
+
         System.out.print("Horizontal suggestion: ");
-        System.out.println(horizontalSuggestion != null ? horizontalSuggestion : "N/A" );
+        System.out.print(horizontalSuggestion != null ? horizontalSuggestion : "N/A" );
+
+        TerminalCursor.cursorDown(1);
+        TerminalCursor.cursorRight(rightOffset);
+        TerminalCursor.eraseUntilEndOfLine();
+        
+        System.out.print("Vertical suggestion: ");
+        System.out.print(verticalSuggestion != null ? verticalSuggestion : "N/A" );
+
     }
 }

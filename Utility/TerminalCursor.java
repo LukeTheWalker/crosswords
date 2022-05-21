@@ -6,7 +6,6 @@ public class TerminalCursor {
         for (int i = 0; i < n; i++){
             System.out.println(ESC + "K");
         }
-
         cursorUp(n);
     }
 
@@ -31,16 +30,29 @@ public class TerminalCursor {
         System.out.print("\r");
         System.out.print(ESC + n + "C");
     }
+
     public static void saveCursor(){
         System.out.print("\r");
         System.out.print(ESC + "s");
     }
+    
     public static void restoreCursor(){
         System.out.print("\r");
         System.out.print(ESC + "u");
     }
+    
     public static void clearTerminal(){
         System.out.print(ESC + "H" + ESC + "2J");
     }
-
+    
+    public static void eraseUntilEndOfLine(){
+        System.out.print(ESC + "0K");
+    }
+    
+    public static Integer goToSuggestion(Integer height){
+        final Integer offset = 4;
+        TerminalCursor.cursorUp(height * 2);
+        TerminalCursor.cursorDown(offset);
+        return height * 2 - offset - 1;
+    }
 }
