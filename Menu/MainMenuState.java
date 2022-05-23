@@ -1,10 +1,8 @@
 import java.util.List;
 
-import YamlStructure.Coords;
-
 public class MainMenuState extends AbstractMenuState{
-    public MainMenuState(Coords contextSavedCoords, Crossword crossword) {
-        this.contextSavedCoords = contextSavedCoords;
+    public MainMenuState(Suggestion contextSavedSuggestion, Crossword crossword) {
+        this.contextSavedSuggestion = contextSavedSuggestion;
         this.crossword = crossword;
     }
 
@@ -25,13 +23,13 @@ public class MainMenuState extends AbstractMenuState{
 
     public MenuState handle(String action){
         if (action.equals("s")){
-            return new SuggestionMenuState(contextSavedCoords, crossword);
+            return new SuggestionMenuState(contextSavedSuggestion, crossword);
         }
         else if (action.equals("i")){
-            return new InsertionMenuState(contextSavedCoords, crossword);
+            return new InsertionMenuState(contextSavedSuggestion, crossword);
         }
         else
             System.err.println("Dang la comparison non funziona");
-        return new MainMenuState(contextSavedCoords, crossword);
+        return new MainMenuState(contextSavedSuggestion, crossword);
     }
 }

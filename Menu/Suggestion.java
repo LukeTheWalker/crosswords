@@ -1,3 +1,4 @@
+import YamlStructure.Coords;
 import YamlStructure.Number;
 
 public class Suggestion {
@@ -18,8 +19,12 @@ public class Suggestion {
         return number;
     }
 
-    public void setNumber(YamlStructure.Number number2) {
-        this.number = number2;
+    public Coords toCoords() {
+        return new Coords(number.getX_cord(), number.getY_cord());
+    }
+
+    public void setNumber(Number number) {
+        this.number = number;
     }
 
     public void setHorizontalSuggestion(String horizontalSuggestion) {
