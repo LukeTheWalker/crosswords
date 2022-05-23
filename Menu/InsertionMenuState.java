@@ -36,7 +36,7 @@ public class InsertionMenuState extends AbstractMenuState{
         while (true){
             System.out.print("Inserisci la parola da scrivere [" + wordCoords.size() + "]: ");
             String word = Utils.sc.nextLine().strip();
-            if ((word.length() == wordCoords.size()) || word.equals("BACK"))
+            if ((word.length() == wordCoords.size()) || word.equals("BACK") || word.equals(""))
                 return word;
             Utils.printInputError("La parola inserita non è della lunghezza corretta");
             TerminalCursor.clearLines(1);
