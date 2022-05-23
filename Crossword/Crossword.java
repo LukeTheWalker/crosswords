@@ -59,7 +59,7 @@ public class Crossword extends Subject{
     public void updateGrid(List<Coords> coords, String word){
         insertWord(coords, word);
         setChanged();
-        notify_observers();
+        notify_observers(coords);
     }
 
     public List<Coords> getWordCoords (Coords startingCoords, String direction){
@@ -79,8 +79,8 @@ public class Crossword extends Subject{
                coords.getX_cord() >= 0 &&
                coords.getY_cord() >= 0;
     }
-    public void notify_observers() {
-        super.notify(new ObserverData(physicalComposition, grid));
+    public void notify_observers(List<Coords> coordsList) {
+        super.notify(new ObserverData(physicalComposition.getSize().getHeight(), coordsList, grid));
     }
 
     public PhysicalComposition getPhysicalComposition(){
@@ -90,13 +90,13 @@ public class Crossword extends Subject{
     public void setupGrid(){
         TerminalCursor.clearTerminal();
         printStandardGrid();
-        for (Number n : physicalComposition.getNumbers()) {
-            if(n.getNumber() != 0)
-                insertNumber(n);
+        for (Number number : physicalComposition.getNumbers()) {
+            if(number.getNumber() != 0)
+                insertNumber(number);
         }
-        setChanged();
-        notify_observers();
-
+        for (Coords black : physicalComposition.getBlacks()) {
+            insertBlack(black);
+        }
     }
 
     private void printStandardGrid(){
@@ -133,6 +133,16 @@ public class Crossword extends Subject{
         TerminalCursor.cursorRight(1 + n.getX_cord()*4);
         System.out.print(Utils.convertNumberToSubscript(Integer.toString(n.getNumber())));
         TerminalCursor.cursorDown((height - n.getY_cord())*2 +1);
+        System.out.print('\r');
+    }
+
+    private void insertBlack(Coords black){
+        int height = physicalComposition.getSize().getHeight();
+        TerminalCursor.cursorUp(height * 2 + 1);
+        TerminalCursor.cursorDown(black.getY_cord() * 2 + 1) ;
+        TerminalCursor.cursorRight(1 + black.getX_cord() * 4);
+        System.out.print("▐█▌");
+        TerminalCursor.cursorDown((height - black.getY_cord()) * 2);
         System.out.print('\r');
     }
 }

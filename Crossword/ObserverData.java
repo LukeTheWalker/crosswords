@@ -1,23 +1,32 @@
-import YamlStructure.PhysicalComposition;
+import YamlStructure.Coords;
+import java.util.List;
 
 public class ObserverData{
-    private PhysicalComposition physicalComposition;
+    private Integer pcHeight;
+    private List<Coords> coordsList;
     private String[][] grid;
-    ObserverData(PhysicalComposition physicalComposition, String[][] grid){
-        this.physicalComposition = physicalComposition;
+    ObserverData(Integer pcHeight, List<Coords> coordsList, String[][] grid){
+        this.pcHeight = pcHeight;
+        this.coordsList = coordsList;
         this.grid = grid;
     }
-    public PhysicalComposition getPhysicalComposition() {
-        return physicalComposition;
+    public Integer getPcHeight() {
+        return pcHeight;
     }
-    public String[][] getGrid() {
+    public List<Coords> getCoordsList() {
+        return coordsList;
+    }
+    public String[][] getGrid(){
         return grid;
     }
-    public void setGrid(String[][] grid) {
-        this.grid = grid;
+    public void setCoordsList(List<Coords> coordsList) {
+        this.coordsList = coordsList;
     }
-    public void setPhysicalComposition(PhysicalComposition physicalComposition) {
-        this.physicalComposition = physicalComposition;
+    public void setPcHeight(Integer pcHeight) {
+        this.pcHeight = pcHeight;
+    }
+    public void setGrid(String[][] grid){
+        this.grid = grid;
     }
     
 }
