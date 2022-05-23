@@ -47,9 +47,7 @@ public class InsertionMenuState extends AbstractMenuState{
         numberOfLinesWritten++;
         System.out.println("Inserisci i dati richiesti per procedere all'inserimento");
         
-        //Boolean saved_coords_found = handleSavedCoords();
-
-        if (/*!saved_coords_found &&*/ askForSuggestion() || contextSavedSuggestion.getNumber() == null){
+        if (askForSuggestion() || contextSavedSuggestion.getNumber() == null){
             TerminalCursor.clearLines(numberOfLinesWritten);
             return "s";
         }
@@ -68,7 +66,7 @@ public class InsertionMenuState extends AbstractMenuState{
 
         TerminalCursor.clearLines(numberOfLinesWritten);
 
-        if (!word.equals("BACK"))
+        if (!word.equals("BACK") && !word.equals(""))
             crossword.updateGrid(wordCoords, word);
 
         return contextSavedSuggestion.toString() + ":" + direction + ":" + word;
