@@ -7,8 +7,10 @@ public class MenuContext {
     MenuContext(String orizzontali_filename, String verticali_filename, String physical_composition_filename) throws FileNotFoundException{
         c = new Crossword(orizzontali_filename, verticali_filename, physical_composition_filename);
         state = new MainMenuState(new Suggestion(), c);
-        Observer  f = new Frontend();
+        Observer f = new Frontend();
+        Observer s = new Saver();
         c.attach(f);
+        c.attach(s);
     }
 
     public void start() {
