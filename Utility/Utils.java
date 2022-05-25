@@ -1,7 +1,9 @@
 import java.io.File;  // Import the File class
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -54,29 +56,31 @@ public class Utils {
         return obj;
     }
 
-    public static String [][] initializeGrid(PhysicalComposition physicalComposition){
+    public static String [][] initializeGrid(PhysicalComposition physicalComposition) throws IOException, FileNotFoundException{
         String [][] grid = new String [physicalComposition.getSize().getWidth()] [physicalComposition.getSize().getHeight()];
+        File savefile = new File("Data/save.txt");
+        RandomAccessFile rac = new RandomAccessFile(savefile, "rw");
+        if(rac.length() != 0) initializeFromSave(physicalComposition, grid, rac);
+        else initializeFromPC(physicalComposition, grid);
+        return grid;
+    }
+
+    private static void initializeFromSave(PhysicalComposition physicalComposition, String[][] grid, RandomAccessFile rac) throws IOException{
+        rac.seek(0);
+        for (int i = 0; i < physicalComposition.getSize().getWidth(); i++){
+            for (int j = 0; j < physicalComposition.getSize().getHeight(); j++){
+                grid[i][j] = Character.toString((char)rac.read());
+            }
+        }
+        rac.close();
+    }
+
+    private static void initializeFromPC(PhysicalComposition physicalComposition, String[][] grid){
         for (int i = 0; i < physicalComposition.getSize().getWidth(); i++)
             for (int j = 0; j < physicalComposition.getSize().getHeight(); j++)
-                grid[i][j] = " ";
+                grid[i][j] = " ";    
         for (Coords black: physicalComposition.getBlacks())
-            grid[black.getX_cord()][black.getY_cord()] = "black";
-
-        // for (Number number: physicalComposition.getNumbers())
-        // for (int i = 1; i < physicalComposition.getNumbers().size(); i++){
-        //     Number number = physicalComposition.getNumbers().get(i);
-        //     //grid[number.getY_cord()][number.getX_cord()] = String.format("%02d", number.getNumber());
-        //     grid[number.getX_cord()][number.getY_cord()] =  convertNumberToSuperscript(String.format("%2d", number.getNumber())) + " ";
-        // }
-        
-        // grid[0][0] = grid[0][0].substring(0, grid[0][0].length()-1) + "S";
-        // grid[1][0] = grid[1][0].substring(0, grid[0][0].length()-1) + "T";
-        // grid[2][0] = grid[2][0].substring(0, grid[0][0].length()-1) + "R";
-        // grid[3][0] = grid[3][0].substring(0, grid[0][0].length()-1) + "A";
-        // grid[4][0] = grid[4][0].substring(0, grid[0][0].length()-1) + "P";
-        // grid[5][0] = grid[5][0].substring(0, grid[0][0].length()-1) + "P";
-        // grid[6][0] = grid[6][0].substring(0, grid[0][0].length()-1) + "O";
-        return grid;
+        grid[black.getX_cord()][black.getY_cord()] = "-";
     }
 
     public static String convertNumberToSuperscript(String numberString) {
