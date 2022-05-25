@@ -35,8 +35,22 @@ public class Crossword extends Subject{
         suggestion.setNumber(number);
         suggestion.setHorizontalSuggestion(Utils.getMatchingElement(orizzontali, " " + number_string + "\\."));
         suggestion.setVerticalSuggestion(Utils.getMatchingElement(verticali, " " + number_string + "\\.")); 
-            
+        suggestion.setHorizontalWordCoords(getWordCoords(suggestion.toCoords(), "o"));
+        suggestion.setVerticalWordCoords  (getWordCoords(suggestion.toCoords(), "v"));
+        suggestion.setHorizontalPlaceholder(getPlaceHolder(suggestion.getHorizontalWordCoords()));
+        suggestion.setverticalPlaceholder  (getPlaceHolder(suggestion.getVerticalWordCoords()  ));
+
         return suggestion; 
+    }
+
+
+    private String getPlaceHolder(List<Coords> wordCoords) {
+        String placeholder = "";
+        for (Coords coords :  wordCoords){
+            String gridCell = grid[coords.getX_cord()][coords.getY_cord()];
+            placeholder += gridCell.equals(" ") ? "_" : gridCell;
+        }
+        return placeholder;
     }
 
     private Boolean checkInsertion(Coords coords){
