@@ -17,10 +17,7 @@ public class Saver implements Observer{
     }
 
     private void writeSaves(Integer height, Integer width, Coords coords, String s) throws IOException{
-        rac.seek(0);
-        for(int i = 0; i < coords.getY_cord()+coords.getX_cord()*height; i++){
-            rac.read();
-        }
+        rac.seek(coords.getY_cord()+coords.getX_cord()*height);
         rac.write((s).getBytes());
     }
 
@@ -28,7 +25,7 @@ public class Saver implements Observer{
         coordsList.stream()
                   .forEach((coords) -> {
                     try {
-                        this.writeSaves(height, width, coords, grid[coords.getX_cord()][coords.getY_cord()]);
+                        writeSaves(height, width, coords, grid[coords.getX_cord()][coords.getY_cord()]);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

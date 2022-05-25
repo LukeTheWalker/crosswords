@@ -56,28 +56,31 @@ public class Utils {
         return obj;
     }
 
-    public static String [][] initializeGrid(PhysicalComposition physicalComposition) throws IOException{
+    public static String [][] initializeGrid(PhysicalComposition physicalComposition) throws IOException, FileNotFoundException{
         String [][] grid = new String [physicalComposition.getSize().getWidth()] [physicalComposition.getSize().getHeight()];
         File savefile = new File("Data/save.txt");
-        try (RandomAccessFile rac = new RandomAccessFile(savefile, "rw")) {
-            if(rac.length() != 0){
-                rac.seek(0);
-                for (int i = 0; i < physicalComposition.getSize().getWidth(); i++){
-                    for (int j = 0; j < physicalComposition.getSize().getHeight(); j++){
-                        grid[i][j] = Character.toString((char)rac.read());
-                    }
-                }
-            }else{
-                for (int i = 0; i < physicalComposition.getSize().getWidth(); i++)
-                    for (int j = 0; j < physicalComposition.getSize().getHeight(); j++)
-                        grid[i][j] = " ";    
-                for (Coords black: physicalComposition.getBlacks())
-                grid[black.getX_cord()][black.getY_cord()] = "-";
-            }
-        } catch (FileNotFoundException e) {
-        }
-
+        RandomAccessFile rac = new RandomAccessFile(savefile, "rw");
+        if(rac.length() != 0) initializeFromSave(physicalComposition, grid, rac);
+        else initializeFromPC(physicalComposition, grid);
         return grid;
+    }
+
+    private static void initializeFromSave(PhysicalComposition physicalComposition, String[][] grid, RandomAccessFile rac) throws IOException{
+        rac.seek(0);
+        for (int i = 0; i < physicalComposition.getSize().getWidth(); i++){
+            for (int j = 0; j < physicalComposition.getSize().getHeight(); j++){
+                grid[i][j] = Character.toString((char)rac.read());
+            }
+        }
+        rac.close();
+    }
+
+    private static void initializeFromPC(PhysicalComposition physicalComposition, String[][] grid){
+        for (int i = 0; i < physicalComposition.getSize().getWidth(); i++)
+            for (int j = 0; j < physicalComposition.getSize().getHeight(); j++)
+                grid[i][j] = " ";    
+        for (Coords black: physicalComposition.getBlacks())
+        grid[black.getX_cord()][black.getY_cord()] = "-";
     }
 
     public static String convertNumberToSuperscript(String numberString) {
