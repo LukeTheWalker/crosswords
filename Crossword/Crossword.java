@@ -1,4 +1,4 @@
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,8 +14,9 @@ public class Crossword extends Subject{
     private List<String> verticali = new ArrayList<>();
     private PhysicalComposition physicalComposition;
     private String[][] grid;
+    
 
-    Crossword(String orizzontali_filename, String verticali_filename, String physical_composition_filename) throws FileNotFoundException{
+    Crossword(String orizzontali_filename, String verticali_filename, String physical_composition_filename) throws IOException{
         orizzontali = Utils.getSuggestions(orizzontali_filename);
         verticali = Utils.getSuggestions(verticali_filename);
         physicalComposition = Utils.getPhysicalComposition(physical_composition_filename);
@@ -44,7 +45,7 @@ public class Crossword extends Subject{
         int height = this.physicalComposition.getSize().getHeight();
         if((coords.getX_cord() >=  width) || (coords.getY_cord() >=  height)) return false;
 
-        return !grid[coords.getX_cord()][coords.getY_cord()].equals("black");
+        return !grid[coords.getX_cord()][coords.getY_cord()].equals("-");
     }
 
     private void insertLetter(Coords coord, char c){
@@ -80,7 +81,7 @@ public class Crossword extends Subject{
                coords.getY_cord() >= 0;
     }
     public void notify_observers(List<Coords> coordsList) {
-        super.notify(new ObserverData(physicalComposition.getSize().getHeight(), coordsList, grid));
+        super.notify(new ObserverData(physicalComposition.getSize().getHeight(), physicalComposition.getSize().getWidth(), coordsList, grid));
     }
 
     public PhysicalComposition getPhysicalComposition(){
@@ -94,9 +95,14 @@ public class Crossword extends Subject{
             if(number.getNumber() != 0)
                 insertNumber(number);
         }
-        for (Coords black : physicalComposition.getBlacks()) {
-            insertBlack(black);
+        List<Coords> coordsList = new ArrayList<>();
+        for(int i = 0; i < physicalComposition.getSize().getWidth(); i++){
+            for(int j = 0; j < physicalComposition.getSize().getHeight(); j++){
+                    coordsList.add(new Coords(i, j));
+            }
         }
+        setChanged();
+        notify_observers(coordsList);
     }
 
     private void printStandardGrid(){
@@ -143,6 +149,17 @@ public class Crossword extends Subject{
         TerminalCursor.cursorRight(1 + black.getX_cord() * 4);
         System.out.print("▐█▌");
         TerminalCursor.cursorDown((height - black.getY_cord()) * 2);
+        System.out.print('\r');
+    }
+
+    private void insertCell(Coords coords, String s){
+        int height = physicalComposition.getSize().getHeight();
+        TerminalCursor.cursorUp(height * 2 + 1);
+        TerminalCursor.cursorDown(coords.getY_cord() * 2 + 1) ;
+        TerminalCursor.cursorRight(1 + coords.getX_cord() * 4);
+        if(s.equals("black")) System.out.print("▐█▌");
+        //else s.e
+        TerminalCursor.cursorDown((height - coords.getY_cord()) * 2);
         System.out.print('\r');
     }
 }

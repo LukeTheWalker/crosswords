@@ -3,15 +3,20 @@ import java.util.List;
 
 public class ObserverData{
     private Integer pcHeight;
+    private Integer pcWidth;
     private List<Coords> coordsList;
     private String[][] grid;
-    ObserverData(Integer pcHeight, List<Coords> coordsList, String[][] grid){
+    ObserverData(Integer pcHeight, Integer pcWidth, List<Coords> coordsList, String[][] grid){
         this.pcHeight = pcHeight;
+        this.pcWidth = pcWidth;
         this.coordsList = coordsList;
         this.grid = grid;
     }
     public Integer getPcHeight() {
         return pcHeight;
+    }
+    public Integer getPcWidth() {
+        return pcWidth;
     }
     public List<Coords> getCoordsList() {
         return coordsList;
@@ -19,14 +24,4 @@ public class ObserverData{
     public String[][] getGrid(){
         return grid;
     }
-    public void setCoordsList(List<Coords> coordsList) {
-        this.coordsList = coordsList;
-    }
-    public void setPcHeight(Integer pcHeight) {
-        this.pcHeight = pcHeight;
-    }
-    public void setGrid(String[][] grid){
-        this.grid = grid;
-    }
-    
 }

@@ -1,10 +1,10 @@
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class MenuContext {
     private MenuState state;
     private Crossword c;
 
-    MenuContext(String orizzontali_filename, String verticali_filename, String physical_composition_filename) throws FileNotFoundException{
+    MenuContext(String orizzontali_filename, String verticali_filename, String physical_composition_filename) throws IOException{
         c = new Crossword(orizzontali_filename, verticali_filename, physical_composition_filename);
         state = new MainMenuState(new Suggestion(), c);
         Observer f = new Frontend();
