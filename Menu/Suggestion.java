@@ -1,4 +1,7 @@
 import java.util.List;
+import java.util.stream.Collectors;
+
+import java.util.stream.Stream;
 
 import YamlStructure.Coords;
 import YamlStructure.Number;
@@ -9,8 +12,6 @@ public class Suggestion {
     private Number number;
     private List<Coords> horizontalWordCoords;
     private List<Coords> verticalWordCoords;
-    private String horizontalPlaceholder;
-    private String verticalPlaceholder;
 
     // Suggestion (String verticalSuggestion, String horizontalSuggestion){
     //     this.setVerticalSuggestion(verticalSuggestion);
@@ -19,22 +20,6 @@ public class Suggestion {
 
     public List<Coords> getWordCoords (String direction){
         return direction.equals("v") ? getVerticalWordCoords() : getHorizontalWordCoords();
-    }
-
-    public String getverticalPlaceholder() {
-        return verticalPlaceholder;
-    }
-
-    public void setverticalPlaceholder(String verticalPlaceholder) {
-        this.verticalPlaceholder = verticalPlaceholder;
-    }
-
-    public String getHorizontalPlaceholder() {
-        return horizontalPlaceholder;
-    }
-
-    public void setHorizontalPlaceholder(String horizontalPlaceholder) {
-        this.horizontalPlaceholder = horizontalPlaceholder;
     }
 
     public String getHorizontalSuggestion() {
@@ -82,18 +67,36 @@ public class Suggestion {
     }
 
     public void printSuggestion(Integer rightOffset){
+        String horizontalPrompt = horizontalSuggestion != null ? horizontalSuggestion + "[" + horizontalWordCoords.size() + "]: ": "N/A" ;
+        String verticalPrompt = verticalSuggestion != null ? verticalSuggestion  + "[" + verticalWordCoords.size() + "]: ": "N/A" ;
+
+        Integer lengthDifference = Math.abs(horizontalPrompt.length() - verticalPrompt.length());
+
+        String padding = Stream.generate(() -> " ").limit(lengthDifference).collect(Collectors.joining());
+
+        if (horizontalSuggestion != null && verticalSuggestion != null){
+            if (horizontalPrompt.length() < verticalPrompt.length()){
+                Integer pivot = horizontalPrompt.indexOf("[");
+                horizontalPrompt = horizontalPrompt.substring(0, pivot) + padding + horizontalPrompt.substring(pivot, horizontalPrompt.length());
+            }
+            else {
+                Integer pivot = verticalPrompt.indexOf("[");
+                verticalPrompt = verticalPrompt.substring(0, pivot) + padding + verticalPrompt.substring(pivot, verticalPrompt.length());
+            }        
+        }   
+
         TerminalCursor.cursorRight(rightOffset);
         TerminalCursor.eraseUntilEndOfLine();
 
         System.out.print("Horizontal suggestion -> ");
-        System.out.print(horizontalSuggestion != null ? horizontalSuggestion + "[" + horizontalWordCoords.size() + "]: " + horizontalPlaceholder : "N/A" );
+        System.out.print(horizontalPrompt);
 
         TerminalCursor.cursorDown(1);
         TerminalCursor.cursorRight(rightOffset);
         TerminalCursor.eraseUntilEndOfLine();
         
-        System.out.print("Vertical suggestion ->  ");
-        System.out.print(verticalSuggestion != null ? verticalSuggestion  + "[" + verticalWordCoords.size() + "]: " + verticalPlaceholder : "N/A" );
+        System.out.print("Vertical suggestion   -> ");
+        System.out.print(verticalPrompt);
 
     }
 }
