@@ -31,7 +31,7 @@ public class InsertionMenuState extends AbstractMenuState{
         return direction;
     }
 
-    private String getBoundedWord(String direction, List<Coords> wordCoords){
+    private String getBoundedWord(List<Coords> wordCoords){
         numberOfLinesWritten++;
         while (true){
             System.out.print("Inserisci la parola da scrivere [" + wordCoords.size() + "]: ");
@@ -58,9 +58,9 @@ public class InsertionMenuState extends AbstractMenuState{
             return "q";
         }
 
-        List<Coords> wordCoords = crossword.getWordCoords(contextSavedSuggestion.toCoords(), direction);
+        List<Coords> wordCoords = contextSavedSuggestion.getWordCoords(direction);
 
-        String word = getBoundedWord(direction, wordCoords);
+        String word = getBoundedWord(wordCoords);
 
         //System.out.println(contextSavedSuggestion.toString() + ":" + typeOfWord + ":" + word);
 

@@ -36,7 +36,9 @@ public class Crossword extends Subject{
         suggestion.setNumber(number);
         suggestion.setHorizontalSuggestion(Utils.getMatchingElement(orizzontali, " " + number_string + "\\."));
         suggestion.setVerticalSuggestion(Utils.getMatchingElement(verticali, " " + number_string + "\\.")); 
-            
+        suggestion.setHorizontalWordCoords(getWordCoords(suggestion.toCoords(), "o"));
+        suggestion.setVerticalWordCoords  (getWordCoords(suggestion.toCoords(), "v"));
+
         return suggestion; 
     }
 

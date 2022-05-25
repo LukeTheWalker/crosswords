@@ -123,8 +123,8 @@ public class Utils {
 
     public static void printInputError(String error){
         System.out.println(error + ", riprovare");
-        System.out.println("Press Enter to continue...");
+        System.out.print("Premi invio per continuare...");
         Utils.sc.nextLine();
-        TerminalCursor.clearLines(3);
+        TerminalCursor.clearLines(2);
     }
 }
