@@ -142,24 +142,24 @@ public class Crossword extends Subject{
         System.out.print('\r');
     }
 
-    private void insertBlack(Coords black){
-        int height = physicalComposition.getSize().getHeight();
-        TerminalCursor.cursorUp(height * 2 + 1);
-        TerminalCursor.cursorDown(black.getY_cord() * 2 + 1) ;
-        TerminalCursor.cursorRight(1 + black.getX_cord() * 4);
-        System.out.print("▐█▌");
-        TerminalCursor.cursorDown((height - black.getY_cord()) * 2);
-        System.out.print('\r');
-    }
+    // private void insertBlack(Coords black){
+    //     int height = physicalComposition.getSize().getHeight();
+    //     TerminalCursor.cursorUp(height * 2 + 1);
+    //     TerminalCursor.cursorDown(black.getY_cord() * 2 + 1) ;
+    //     TerminalCursor.cursorRight(1 + black.getX_cord() * 4);
+    //     System.out.print("▐█▌");
+    //     TerminalCursor.cursorDown((height - black.getY_cord()) * 2);
+    //     System.out.print('\r');
+    // }
 
-    private void insertCell(Coords coords, String s){
-        int height = physicalComposition.getSize().getHeight();
-        TerminalCursor.cursorUp(height * 2 + 1);
-        TerminalCursor.cursorDown(coords.getY_cord() * 2 + 1) ;
-        TerminalCursor.cursorRight(1 + coords.getX_cord() * 4);
-        if(s.equals("black")) System.out.print("▐█▌");
-        //else s.e
-        TerminalCursor.cursorDown((height - coords.getY_cord()) * 2);
-        System.out.print('\r');
-    }
+    // private void insertCell(Coords coords, String s){
+    //     int height = physicalComposition.getSize().getHeight();
+    //     TerminalCursor.cursorUp(height * 2 + 1);
+    //     TerminalCursor.cursorDown(coords.getY_cord() * 2 + 1) ;
+    //     TerminalCursor.cursorRight(1 + coords.getX_cord() * 4);
+    //     if(s.equals("black")) System.out.print("▐█▌");
+    //     //else s.e
+    //     TerminalCursor.cursorDown((height - coords.getY_cord()) * 2);
+    //     System.out.print('\r');
+    // }
 }
