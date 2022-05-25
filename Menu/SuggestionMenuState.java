@@ -23,7 +23,7 @@ public class SuggestionMenuState extends AbstractMenuState{
             
         contextSavedSuggestion = crossword.getSuggestion(stringNumber);
 
-        contextSavedSuggestion.printSuggestion(width * 5);
+        contextSavedSuggestion.printSuggestion(width * 4 + 5);
 
         TerminalCursor.cursorDown(linesJumped);
     }

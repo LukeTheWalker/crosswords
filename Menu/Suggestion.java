@@ -67,8 +67,8 @@ public class Suggestion {
     }
 
     public void printSuggestion(Integer rightOffset){
-        String horizontalPrompt = horizontalSuggestion != null ? horizontalSuggestion + "[" + horizontalWordCoords.size() + "]: ": "N/A" ;
-        String verticalPrompt = verticalSuggestion != null ? verticalSuggestion  + "[" + verticalWordCoords.size() + "]: ": "N/A" ;
+        String horizontalPrompt = horizontalSuggestion != null ? horizontalSuggestion + "[" + horizontalWordCoords.size() + "] ": "N/A" ;
+        String verticalPrompt = verticalSuggestion != null ? verticalSuggestion  + "[" + verticalWordCoords.size() + "] ": "N/A" ;
 
         Integer lengthDifference = Math.abs(horizontalPrompt.length() - verticalPrompt.length());
 
