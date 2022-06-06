@@ -17,6 +17,7 @@ public class MenuContext {
         c.setupGrid();
         while (true){
             String action = state.printMenuOptions();
+            if (action.equals("q")) return;
             setState(state.handle(action));
         }
 

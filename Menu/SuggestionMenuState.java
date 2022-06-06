@@ -46,6 +46,11 @@ public class SuggestionMenuState extends AbstractMenuState{
     }
 
     public MenuState handle(String action){
-        return new InsertionMenuState(contextSavedSuggestion, crossword);
+        if (action.equals("b")){           
+            return new MainMenuState(contextSavedSuggestion, crossword);
+        }
+        else {
+            return new InsertionMenuState(contextSavedSuggestion, crossword);
+        }
     }
 }

@@ -16,7 +16,7 @@ public class InsertionMenuState extends AbstractMenuState{
 
     public String getValidDirection(){
         numberOfLinesWritten++;
-        String prompt = "Vuoi inserire una parola Orizzontale o Verticale? [O/v/q]: ";
+        String prompt = "Vuoi inserire una parola Orizzontale o Verticale? [O/v/b]: ";
         String direction;
         if (contextSavedSuggestion.getHorizontalSuggestion() == null){
             direction = "v";
@@ -27,7 +27,7 @@ public class InsertionMenuState extends AbstractMenuState{
             System.out.println(prompt + "o");
         }
         else 
-            direction = getValidInput(prompt, List.of("o", "v", "q"), "o");
+            direction = getValidInput(prompt, List.of("o", "v", "b"), "o");
         return direction;
     }
 
@@ -53,9 +53,9 @@ public class InsertionMenuState extends AbstractMenuState{
         }
 
         String direction = getValidDirection();
-        if (direction.equals("q")){
+        if (direction.equals("b")){
             TerminalCursor.clearLines(numberOfLinesWritten);
-            return "q";
+            return "b";
         }
 
         List<Coords> wordCoords = contextSavedSuggestion.getWordCoords(direction);
