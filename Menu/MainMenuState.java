@@ -8,13 +8,14 @@ public class MainMenuState extends AbstractMenuState{
 
     public String printMenuOptions(){
 
-        numberOfLinesWritten += 4;
+        numberOfLinesWritten += 5;
 
         System.out.println("Scegli azione");
         System.out.println("Leggi definizione [s]");
         System.out.println("Inserisci parola  [i]");
+        System.out.println("Esci              [q]");
         
-        String action = getValidInput("action [S/i]: ", List.of("s", "i"), "s");
+        String action = getValidInput("action [S/i]: ", List.of("s", "i", "q"), "s");
         
         TerminalCursor.clearLines(numberOfLinesWritten);
 
