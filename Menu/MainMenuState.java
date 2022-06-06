@@ -15,7 +15,7 @@ public class MainMenuState extends AbstractMenuState{
         System.out.println("Inserisci parola  [i]");
         System.out.println("Esci              [q]");
         
-        String action = getValidInput("action [S/i]: ", List.of("s", "i", "q"), "s");
+        String action = getValidInput("action [S/i/q]: ", List.of("s", "i", "q"), "s");
         
         TerminalCursor.clearLines(numberOfLinesWritten);
 
