@@ -13,11 +13,6 @@ public class Suggestion {
     private List<Coords> horizontalWordCoords;
     private List<Coords> verticalWordCoords;
 
-    // Suggestion (String verticalSuggestion, String horizontalSuggestion){
-    //     this.setVerticalSuggestion(verticalSuggestion);
-    //     this.setHorizontalSuggestion(horizontalSuggestion);
-    // }
-
     public List<Coords> getWordCoords (String direction){
         return direction.equals("v") ? getVerticalWordCoords() : getHorizontalWordCoords();
     }

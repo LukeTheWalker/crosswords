@@ -30,7 +30,7 @@ public class MainMenuState extends AbstractMenuState{
             return new InsertionMenuState(contextSavedSuggestion, crossword);
         }
         else
-            System.err.println("Dang la comparison non funziona");
+            System.err.println("Errore nella funzione di comparazione");
         return new MainMenuState(contextSavedSuggestion, crossword);
     }
 }
