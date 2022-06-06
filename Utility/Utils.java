@@ -1,13 +1,13 @@
-import java.io.File;  // Import the File class
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Scanner; // Import the Scanner class to read text files
+import java.util.Scanner;
 
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -49,10 +49,16 @@ public class Utils {
         return numberString;
     }
 
-    public static PhysicalComposition getPhysicalComposition (String filename) throws FileNotFoundException{
-        InputStream inputStream = new FileInputStream(filename);
-        Yaml yaml = new Yaml(new Constructor(PhysicalComposition.class));
-        PhysicalComposition obj = yaml.load(inputStream);
+    public static PhysicalComposition getPhysicalComposition (String filename){
+        PhysicalComposition obj = null;
+        try (InputStream inputStream = new FileInputStream(filename)) {
+            Yaml yaml = new Yaml(new Constructor(PhysicalComposition.class));
+            obj = yaml.load(inputStream);
+        } catch (IOException e) {
+            System.err.println("Impossibile trovare Composition File");
+            e.printStackTrace();
+            System.exit(1);
+        }
         return obj;
     }
 
@@ -98,9 +104,7 @@ public class Utils {
     }
 
     public static String getMatchingElement(List<String> lst, String text){
-        String pattern = ".*" + text + ".*";
-        //System.out.println(pattern);
-        
+        String pattern = ".*" + text + ".*";        
         try {
             return lst
                 .stream()
