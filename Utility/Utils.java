@@ -62,12 +62,17 @@ public class Utils {
         return obj;
     }
 
-    public static String [][] initializeGrid(PhysicalComposition physicalComposition) throws IOException, FileNotFoundException{
+    public static String [][] initializeGrid(PhysicalComposition physicalComposition){
         String [][] grid = new String [physicalComposition.getSize().getWidth()] [physicalComposition.getSize().getHeight()];
         File savefile = new File("Data/save.txt");
-        RandomAccessFile rac = new RandomAccessFile(savefile, "rw");
-        if(rac.length() != 0) initializeFromSave(physicalComposition, grid, rac);
-        else initializeFromPC(physicalComposition, grid);
+        try (RandomAccessFile rac = new RandomAccessFile(savefile, "rw")) {
+            if(rac.length() != 0) initializeFromSave(physicalComposition, grid, rac);
+            else initializeFromPC(physicalComposition, grid);
+        } catch (IOException e) {
+            System.err.println("Impossibile interagire con il File di salvataggio");
+            e.printStackTrace();
+            System.exit(1);
+        }
         return grid;
     }
 
