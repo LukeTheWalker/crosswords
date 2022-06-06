@@ -16,22 +16,23 @@ public class Saver implements Observer{
         }
     }
 
-    private void writeSaves(Integer height, Integer width, Coords coords, String s) throws IOException{
-        rac.seek(coords.getY_cord()+coords.getX_cord()*height);
-        rac.write((s).getBytes());
+    private void writeSaves(Integer height, Integer width, Coords coords, String s) {
+        try {
+            rac.seek(coords.getY_cord()+coords.getX_cord()*height);
+            rac.write((s).getBytes());
+        } catch (IOException e) {
+            System.err.println("Impossibile interagire con il File di salvataggio");
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     private void saveGridUpdate(Integer height, Integer width, List<Coords> coordsList, String[][] grid){
         coordsList.stream()
-                  .forEach((coords) -> {
-                    try {
-                        writeSaves(height, width, coords, grid[coords.getX_cord()][coords.getY_cord()]);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });     
+                  .forEach((coords) -> 
+                   writeSaves(height, width, coords, grid[coords.getX_cord()][coords.getY_cord()]));
+                     
     }
-    
     
     @Override
     public void update(Subject s, Object o) {

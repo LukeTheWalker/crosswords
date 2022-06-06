@@ -62,8 +62,6 @@ public class InsertionMenuState extends AbstractMenuState{
 
         String word = getBoundedWord(wordCoords);
 
-        //System.out.println(contextSavedSuggestion.toString() + ":" + typeOfWord + ":" + word);
-
         TerminalCursor.clearLines(numberOfLinesWritten);
 
         if (!word.equals("BACK") && !word.equals(""))

@@ -15,7 +15,7 @@ public class MainMenuState extends AbstractMenuState{
         System.out.println("Inserisci parola  [i]");
         System.out.println("Esci              [q]");
         
-        String action = getValidInput("action [S/i]: ", List.of("s", "i", "q"), "s");
+        String action = getValidInput("action [S/i/q]: ", List.of("s", "i", "q"), "s");
         
         TerminalCursor.clearLines(numberOfLinesWritten);
 
@@ -30,7 +30,7 @@ public class MainMenuState extends AbstractMenuState{
             return new InsertionMenuState(contextSavedSuggestion, crossword);
         }
         else
-            System.err.println("Dang la comparison non funziona");
+            System.err.println("Errore nella funzione di comparazione");
         return new MainMenuState(contextSavedSuggestion, crossword);
     }
 }

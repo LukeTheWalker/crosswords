@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +15,7 @@ public class Crossword extends Subject{
     private String[][] grid;
     
 
-    Crossword(String orizzontali_filename, String verticali_filename, String physical_composition_filename) throws IOException{
+    Crossword(String orizzontali_filename, String verticali_filename, String physical_composition_filename){
         orizzontali = Utils.getSuggestions(orizzontali_filename);
         verticali = Utils.getSuggestions(verticali_filename);
         physicalComposition = Utils.getPhysicalComposition(physical_composition_filename);
@@ -143,25 +142,4 @@ public class Crossword extends Subject{
         TerminalCursor.cursorDown((height - n.getY_cord())*2 +1);
         System.out.print('\r');
     }
-
-    // private void insertBlack(Coords black){
-    //     int height = physicalComposition.getSize().getHeight();
-    //     TerminalCursor.cursorUp(height * 2 + 1);
-    //     TerminalCursor.cursorDown(black.getY_cord() * 2 + 1) ;
-    //     TerminalCursor.cursorRight(1 + black.getX_cord() * 4);
-    //     System.out.print("▐█▌");
-    //     TerminalCursor.cursorDown((height - black.getY_cord()) * 2);
-    //     System.out.print('\r');
-    // }
-
-    // private void insertCell(Coords coords, String s){
-    //     int height = physicalComposition.getSize().getHeight();
-    //     TerminalCursor.cursorUp(height * 2 + 1);
-    //     TerminalCursor.cursorDown(coords.getY_cord() * 2 + 1) ;
-    //     TerminalCursor.cursorRight(1 + coords.getX_cord() * 4);
-    //     if(s.equals("black")) System.out.print("▐█▌");
-    //     //else s.e
-    //     TerminalCursor.cursorDown((height - coords.getY_cord()) * 2);
-    //     System.out.print('\r');
-    // }
 }

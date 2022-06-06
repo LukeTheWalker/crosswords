@@ -7,12 +7,6 @@ public class Frontend implements Observer {
         coordsList.stream()
                   .forEach((coords) -> 
                    showCell(grid[coords.getX_cord()][coords.getY_cord()], coords.getX_cord(), coords.getY_cord(), height));
-
-        for(int i = 0; i < 14; i++){
-            for(int j = 0; j < 14; j++){
-                //System.out.println("XX"+grid[i][j]+"XX");
-            }
-        }
     }
 
     private void showCell(String s, int x, int y, Integer height){
@@ -23,7 +17,6 @@ public class Frontend implements Observer {
         else System.out.print(" " + s);
         TerminalCursor.cursorDown((height - y) * 2);
         System.out.print('\r');
-        //System.out.print(s.getClass().getSimpleName());
     }
 
 
