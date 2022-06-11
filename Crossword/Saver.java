@@ -6,9 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 public class Saver implements Observer{
-    File savefile = new File("Data/save.txt");
+    File savefile;
     RandomAccessFile rac;
-    Saver(){
+    Saver(String saveLocation){
+        savefile = new File(saveLocation);
         try {
             rac = new RandomAccessFile(savefile, "rw");
         } catch (FileNotFoundException e) {
