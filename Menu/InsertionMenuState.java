@@ -31,6 +31,13 @@ public class InsertionMenuState extends AbstractMenuState{
         return direction;
     }
 
+    private void printInputError(String error){
+        System.out.println(error + ", riprovare");
+        System.out.print("Premi invio per continuare...");
+        Utils.sc.nextLine();
+        TerminalCursor.clearLines(2);
+    }
+
     private String getBoundedWord(List<Coords> wordCoords){
         numberOfLinesWritten++;
         while (true){
@@ -38,7 +45,7 @@ public class InsertionMenuState extends AbstractMenuState{
             String word = Utils.sc.nextLine().strip();
             if ((word.length() == wordCoords.size()) || word.equals("BACK") || word.equals(""))
                 return word;
-            Utils.printInputError("La parola inserita non è della lunghezza corretta");
+            printInputError("La parola inserita non è della lunghezza corretta");
             TerminalCursor.clearLines(1);
         }
     }

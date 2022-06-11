@@ -16,10 +16,10 @@ public class Crossword extends Subject{
     
 
     Crossword(String orizzontali_filename, String verticali_filename, String physical_composition_filename){
-        orizzontali = Utils.getSuggestions(orizzontali_filename);
-        verticali = Utils.getSuggestions(verticali_filename);
-        physicalComposition = Utils.getPhysicalComposition(physical_composition_filename);
-        grid = Utils.initializeGrid(physicalComposition);
+        orizzontali = FileHandler.getSuggestions(orizzontali_filename);
+        verticali = FileHandler.getSuggestions(verticali_filename);
+        physicalComposition = FileHandler.getPhysicalComposition(physical_composition_filename);
+        grid = FileHandler.initializeGrid(physicalComposition);
     }
 
     public Suggestion getSuggestion(String number_string){
@@ -72,7 +72,7 @@ public class Crossword extends Subject{
     }
 
     public Boolean validateNumber(int n){
-        return getPhysicalComposition().getNumbers().stream().anyMatch(num -> num.getNumber() >= n);
+        return getPhysicalComposition().getNumbers().stream().anyMatch(num -> num.getNumber() == n && n != 0);
     }
 
     public Boolean validateCoords(Coords coords){
