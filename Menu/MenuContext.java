@@ -6,7 +6,7 @@ public class MenuContext {
         c = new Crossword(orizzontali_filename, verticali_filename, physical_composition_filename);
         state = new MainMenuState(new Suggestion(), c);
         Observer f = new Frontend();
-        Observer s = new Saver();
+        Observer s = new Saver("Data/save.txt");
         c.attach(f);
         c.attach(s);
     }
