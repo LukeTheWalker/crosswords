@@ -72,7 +72,7 @@ public class Crossword extends Subject{
     }
 
     public Boolean validateNumber(int n){
-        return getPhysicalComposition().getNumbers().stream().anyMatch(num -> num.getNumber() >= n);
+        return getPhysicalComposition().getNumbers().stream().anyMatch(num -> num.getNumber() == n && n != 0);
     }
 
     public Boolean validateCoords(Coords coords){
