@@ -18,6 +18,7 @@ import YamlStructure.PhysicalComposition;
 
 public class Utils {
     public static Scanner sc = new Scanner(System.in); 
+    
     public static List<String> getSuggestions (String filename){
         List<String> res = new ArrayList<>();
         try {
@@ -33,20 +34,6 @@ public class Utils {
             e.printStackTrace();
         }
         return res;
-    }
-
-    public static String convertNumberToSubscript(String numberString) {
-        numberString = numberString.replaceAll("0", "₀");
-        numberString = numberString.replaceAll("1", "₁");
-        numberString = numberString.replaceAll("2", "₂");
-        numberString = numberString.replaceAll("3", "₃");
-        numberString = numberString.replaceAll("4", "₄");
-        numberString = numberString.replaceAll("5", "₅");
-        numberString = numberString.replaceAll("6", "₆");
-        numberString = numberString.replaceAll("7", "₇");
-        numberString = numberString.replaceAll("8", "₈");
-        numberString = numberString.replaceAll("9", "₉");         
-        return numberString;
     }
 
     public static PhysicalComposition getPhysicalComposition (String filename){
@@ -108,6 +95,20 @@ public class Utils {
         return numberString;
     }
 
+    public static String convertNumberToSubscript(String numberString) {
+        numberString = numberString.replaceAll("0", "₀");
+        numberString = numberString.replaceAll("1", "₁");
+        numberString = numberString.replaceAll("2", "₂");
+        numberString = numberString.replaceAll("3", "₃");
+        numberString = numberString.replaceAll("4", "₄");
+        numberString = numberString.replaceAll("5", "₅");
+        numberString = numberString.replaceAll("6", "₆");
+        numberString = numberString.replaceAll("7", "₇");
+        numberString = numberString.replaceAll("8", "₈");
+        numberString = numberString.replaceAll("9", "₉");         
+        return numberString;
+    }
+
     public static String getMatchingElement(List<String> lst, String text){
         String pattern = ".*" + text + ".*";        
         try {
@@ -128,12 +129,5 @@ public class Utils {
           } catch(NumberFormatException e){  
             return false;  
           }
-    }
-
-    public static void printInputError(String error){
-        System.out.println(error + ", riprovare");
-        System.out.print("Premi invio per continuare...");
-        Utils.sc.nextLine();
-        TerminalCursor.clearLines(2);
     }
 }

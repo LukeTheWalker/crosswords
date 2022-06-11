@@ -12,7 +12,9 @@ public class Saver implements Observer{
         try {
             rac = new RandomAccessFile(savefile, "rw");
         } catch (FileNotFoundException e) {
+            System.err.println("Impossibile interagire con il File di salvataggio");
             e.printStackTrace();
+            System.exit(1);        
         }
     }
 
